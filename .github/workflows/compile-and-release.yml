@@ -1,0 +1,36 @@
+name: Compile LaTeX and Update Release
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  compile-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install LaTeX
+        uses: xu-cheng/latex-action@v3
+        with:
+          latexmk_use_xelatex: false
+          root_file: cdi3.tex
+
+      - name: Create or update release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: PDF
+          body: Release contains the most recent compiled PDF from the `main` branch.
+          files: cdi3.pdf
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

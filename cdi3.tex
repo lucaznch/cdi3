@@ -1,0 +1,446 @@
+\documentclass{article}
+\title{Resumos de Cálculo Diferencial e Integral III}
+\author{Gabriel Luca Silva}
+\date{}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+% \usepackage{bbm}
+% \usepackage{comment}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=false,
+    pdfborder={0 0 0}
+}
+\usepackage{indentfirst}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{subcaption}
+
+\geometry{
+    a4paper,
+    % total={129mm,170mm},
+    left=23mm,
+    top=23mm,
+    bottom=28mm,
+    right=28mm,
+}
+
+% -------------------------------------------------------
+
+\begin{document}
+\maketitle
+\vspace*{\fill}
+\textbf{Estes resumos não são totalmente rigorosos e destinam-se principalmente a servir como
+um guia de consulta rápida, em vez de um texto explicativo detalhado.}
+\bigskip
+
+
+\newpage
+
+
+\renewcommand{\contentsname}{Índice}
+\tableofcontents
+
+
+\newpage
+
+
+\section{Introdução}
+O foco principal de Cálculo Diferencial e Integral III são as equações diferenciais.
+Estes resumos apresentam métodos de resolução para os seus diferentes tipos.
+Faz sentido começar por algumas definições.
+
+\subsection{Equação Diferencial}
+Uma equação diferencial é uma equação que envolve uma função desconhecida e as suas derivadas.
+
+As incógnitas destas equações são funções, por isso
+as soluções das equações diferenciais vão ser sempre funções.
+
+\subsection{Equação Diferencial Ordinária (EDO)}
+A função desconhecida depende de uma única variável independente.
+
+$$
+\frac{d^2 x}{dt^2} + \omega^2 x = 0 \quad \text{que corresponde a} \quad x'' + \omega^2 x = 0
+$$
+
+\begin{itemize}
+    \item A função desconhecida é $x(t)$.
+    \item A função $x(t)$ é uma variável dependente que depende apenas da variável independente $t$.
+\end{itemize}
+
+\subsection{Equação diferencial parcial (EDP)}
+A função desconhecida depende de várias variáveis independentes.
+
+$$
+\frac{\partial u}{\partial t} = \alpha \frac{\partial^2 u}{\partial x^2}
+$$
+
+\begin{itemize}
+    \item A função desconhecida é $u(x,t)$.
+    \item A função $u(x,t)$ é uma variável dependente que depende das variáveis independentes $x$ e $t$.
+\end{itemize}
+
+\subsection{Ordem de uma Equação Diferencial}
+A ordem de uma equação diferencial é a maior ordem de derivada presente na equação.
+
+$$
+y''' + 3y'' - 4y' + 7y = 0
+$$
+
+\begin{itemize}
+    \item A equação diferencial é de ordem 3.
+\end{itemize}
+
+\subsection{Equação Diferencial Ordinária Linear e Não Linear}
+Uma equação diferencial ordinária de ordem $n$ é dita linear se pode ser escrita na forma:
+
+$$
+a_0(t) y^{(n)} + a_1(t) y^{(n-1)} + \ldots + a_{n-1}(t) y' + a_n(t) y = g(t)
+$$
+
+onde $a_n(t), a_{n-1}(t), \ldots, a_1(t), a_0(t)$ e $g(t)$ são funções conhecidas.\par
+\bigskip
+Se a equação não pode ser escrita nesta forma, é dita não linear.
+
+\subsubsection{Equação Diferencial Ordinária Linear Homogénea e Não Homogénea}
+Uma equação diferencial ordinária linear de ordem $n$ pode ser classificada como:
+
+\begin{itemize}
+    \item Homogénea se $g(t) = 0$.
+    \item Não Homogénea se $g(t) \neq 0$.
+\end{itemize}
+
+
+\newpage
+
+
+\section{Equações Diferenciais Ordinárias de Primeira Ordem}
+
+\subsection{Equação Diferencial Ordinária de 1ª Ordem Linear Homogénea}
+\label{subsec: edo-ordem1-linear-homogenea}
+
+\begin{align*}
+& \boxed{y' + a(t) y = 0} \\
+& y' = -a(t) y \\
+& \frac{y'}{y} = -a(t) \\
+& \frac{d}{dt} \Big[ \ln|y| \Big] = -a(t) \\
+& \ln|y| = \int -a(t) dt \\
+& \ln|y| = - \int a(t) dt + c, \quad c \in \mathbb{R} \\
+& |y| = e^{-\int a(t) dt + c}, \quad c \in \mathbb{R} \\
+& |y| = e^c e^{-\int a(t) dt}, \quad c \in \mathbb{R} \\
+& |y| = k e^{-\int a(t) dt}, \quad k \in \mathbb{R}^+ \text{ pois } k = e^c > 0 \\
+& y = \pm k e^{-\int a(t) dt}, \quad k \in \mathbb{R}^+ \\
+& y = k e^{-\int a(t) dt}, \quad k \in \mathbb{R} \setminus \{0\} \\
+& \text{Como } y(t) = 0 \text{ é também solução, conclui-se que:} \\
+& \boxed{y(t) = k e^{-\int a(t) dt}, \quad k \in \mathbb{R}}
+\end{align*}
+
+\bigskip
+
+\subsection{Equação Diferencial Ordinária de 1ª Ordem Linear Não Homogénea}
+\label{subsec: edo-ordem1-linear-nao-homogenea}
+
+Para este tipo de equação, usamos o \textbf{método do fator integrante}.
+Este método introduz uma função auxiliar $\mu(t)$, a que se chama fator integrante,
+com o objetivo de transformar o lado esquerdo da equação numa derivada do produto de duas funções, $\mu(t)$ e $y(t)$.
+
+\begin{gather*}
+\boxed{y' + a(t) y = g(t)} \\
+\mu(t) y' + \mu(t) a(t) y = \mu(t) g(t)
+\end{gather*}
+
+Queremos escrever o lado esquerdo como
+
+\begin{gather*}
+\frac{d}{dt} \Big[ \mu y \Big] = \mu' y + \mu y'
+\end{gather*}
+
+Para isso, é necessário que
+
+\begin{gather*}
+\mu' = \mu a(t)
+\end{gather*}
+
+Sendo esta equação uma \nameref{subsec: edo-ordem1-linear-homogenea}, tal que
+
+\begin{gather*}
+\mu' + (-a(t)) \mu = 0 \\
+\implies \mu(t) = e^{\int a(t) dt}
+\end{gather*}
+
+Então, calculado o fator integrante, podemos reescrever a equação original como
+
+\begin{align*}
+& \frac{d}{dt} \Big[ \mu(t) y \Big] = \mu(t) g(t) \\
+& \mu(t) y= \int \mu(t) g(t) dt \\
+& \mu(t) y = \int \mu(t) g(t) dt + c, \quad c \in \mathbb{R} \\
+& y(t) = \frac{1}{\mu(t)} \left( \int \mu(t) g(t) dt + c \right), \quad c \in \mathbb{R} \\
+& \boxed{y(t) = e^{-\int a(t) dt} \left( \int e^{\int a(t) dt} g(t) dt + c \right), \quad c \in \mathbb{R}}
+\end{align*}
+
+\bigskip
+
+\subsection{Equação Diferencial Ordinária de 1ª Ordem Separável}
+
+Uma equação diferencial é dita separável se pode ser escrita na forma
+
+\begin{gather*}
+\boxed{\frac{dy}{dt} = \frac{g(t)}{f(y)}}
+\end{gather*}
+
+Separando as variáveis, obtemos
+
+\begin{gather*}
+f(y) \frac{dy}{dt} = g(t)
+\end{gather*}
+
+Integrando ambos os lados em ordem a $t$, obtemos
+
+\begin{gather*}
+\int f(y) \frac{dy}{dt} dt = \int g(t) dt
+\end{gather*}
+
+Ficando com $y(t)$ definido implicitamente por
+
+\begin{gather*}
+\boxed{\int f(y) dy = \int g(t) dt}
+\end{gather*}
+
+\smallskip
+
+\begin{itemize}
+    \item Uma Equação Separável pode ser linear ou não linear.
+    \item Uma \nameref{subsec: edo-ordem1-linear-homogenea} é separável.
+    \item Uma \nameref{subsec: edo-ordem1-linear-nao-homogenea} não é separável.
+\end{itemize}
+
+\bigskip
+
+\subsection{Equação Diferencial Ordinária de 1ª Ordem Exata}
+\label{subsec: edo-ordem1-exata}
+
+\begin{gather*}
+\boxed{M(t,y) + N(t,y) \frac{dy}{dt} = 0}
+\end{gather*}
+
+Esta equação diferencial é dita exata se puder ser escrita como
+
+\begin{gather*}
+\frac{d}{dt} \Big[ \phi(t,y) \Big] = 0
+\end{gather*}
+
+Usando a regra da cadeia, temos que
+
+\begin{gather*}
+\frac{d}{dt} \Big[ \phi(t,y) \Big] = \frac{\partial \phi}{\partial t} + \frac{\partial \phi}{\partial y} \frac{dy}{dt}
+\end{gather*}
+
+Logo, para que a equação seja exata, deve ser possível encontrar uma função $\phi(t,y)$ tal que
+
+\begin{gather*}
+\frac{\partial \phi}{\partial t} = M(t,y) \quad \text{ e } \quad \frac{\partial \phi}{\partial y} = N(t,y)
+\end{gather*}
+
+A solução da equação exata é dada implicitamente por
+
+\begin{gather*}
+\boxed{\phi(t,y) = c, \quad c \in \mathbb{R}}
+\end{gather*}
+
+\begin{itemize}
+    \item Nota: uma equação exata pode ser linear ou não linear.
+\end{itemize}
+
+\smallskip
+
+\paragraph{Teorema}
+\begin{gather*}
+\text{Existe } \phi(t,y) \text{ tal que } \frac{\partial \phi}{\partial t} = M(t,y) \text{ e } \frac{\partial \phi}{\partial y} = N(t,y) \text{ se, e só se, } \frac{\partial M}{\partial y} = \frac{\partial N}{\partial t}
+\end{gather*}
+
+
+\paragraph{Método de resolução de uma equação exata}
+\label{par: metodo-resolucao-edo-exata}
+\begin{gather*}
+M(t,y) + N(t,y) \frac{dy}{dt} = 0
+\end{gather*}
+
+\begin{enumerate}
+    \item Verificar se é exata.
+    \begin{gather*}
+    \frac{\partial M}{\partial y} = \frac{\partial N}{\partial t}
+    \end{gather*}
+    
+    \item Se for exata, encontrar a função $\phi(t,y)$, tal que
+    \begin{gather*}
+    \begin{dcases}
+    \frac{\partial \phi}{\partial t} = M \implies \phi = \int M dt + c_1(y) \\
+    \frac{\partial \phi}{\partial y} = N \implies \phi = \int N dy + c_2(t)
+    \end{dcases}
+    \end{gather*}
+    
+    Basta calcular uma das equações, e depois determinar o seu termo $c$.
+    
+    Por exemplo, podemos calcular a primeira equação,
+    \begin{gather*}
+    \phi = \int M dt + c_1(y)
+    \end{gather*}
+
+    E depois para determinar $c_1(y)$, usamos a segunda equação com o $\phi$ encontrado.
+    \begin{gather*}
+    \frac{\partial \phi}{\partial y} = N \\
+    \frac{\partial }{\partial y} \left( \int M dt + c_1(y) \right) = N \\
+    c_1'(y) = N - \frac{\partial }{\partial y} \left( \int M dt \right)
+    \end{gather*}
+
+    \item A solução é dada implicitamente por
+    \begin{gather*}
+    \phi(t,y) = c, \quad c \in \mathbb{R}
+    \end{gather*}
+\end{enumerate}
+
+\bigskip
+
+\subsection{Equação Diferencial Ordinária de 1ª Ordem Redutível a Exata}
+
+Por vezes, uma equação diferencial que não é exata pode ser transformada numa equação exata 
+usando o \textbf{método do fator integrante} (visto anteriormente na resolução de uma \nameref{subsec: edo-ordem1-linear-nao-homogenea})
+
+\begin{gather*}
+\boxed{M(t,y) + N(t,y) \frac{dy}{dt} = 0}
+\end{gather*}
+
+Se a equação diferencial não for exata, ou seja, se
+
+\begin{gather*}
+\frac{\partial M}{\partial y} \neq \frac{\partial N}{\partial t}
+\end{gather*}
+
+Então vamos procurar um fator integrante $\mu(t,y)$ para tornar a equação exata.
+
+\begin{gather*}
+\mu(t,y) M(t,y) + \mu(t,y) N(t,y) \frac{dy}{dt} = 0
+\end{gather*}
+
+Para que esta nova equação seja exata, é necessário que
+
+\begin{gather*}
+\frac{\partial }{\partial y} \Big[ \mu M \Big] = \frac{\partial }{\partial t} \Big[ \mu N \Big] \\
+\frac{\partial \mu}{\partial y} M + \mu \frac{\partial M}{\partial y} = \frac{\partial \mu}{\partial t} N + \mu \frac{\partial N}{\partial t}
+\end{gather*}
+
+Esta é uma equação difícil de resolver para determinar o fator integrante $\mu(t,y)$.
+No entanto, em alguns casos, podemos encontrar um fator integrante que depende apenas de $t$ ou apenas de $y$.
+
+\bigskip
+
+Para $\mu = \mu(t)$, a equação torna-se
+
+\begin{gather*}
+0 + \mu \frac{\partial M}{\partial y} = \mu' N + \mu \frac{\partial N}{\partial t} \\
+N \mu' = \mu \left( \frac{\partial M}{\partial y} - \frac{\partial N}{\partial t} \right) \\
+\mu' = \mu \frac{\frac{\partial M}{\partial y} - \frac{\partial N}{\partial t}}{N} \\
+\end{gather*}
+
+Esta é uma \nameref{subsec: edo-ordem1-linear-homogenea}, que pode ser resolvida se, e só se
+
+\begin{gather*}
+\frac{\frac{\partial M}{\partial y} - \frac{\partial N}{\partial t}}{N} \quad \text{depender apenas de } t
+\end{gather*}
+
+Se assim for, ficamos então com
+
+\begin{gather*}
+\mu' + \left( - \frac{\frac{\partial M}{\partial y} - \frac{\partial N}{\partial t}}{N} \right) \mu = 0 \\
+\implies \mu(t) = e^{\int \frac{\frac{\partial M}{\partial y} - \frac{\partial N}{\partial t}}{N} dt}
+\end{gather*}
+
+Similarmente, para $\mu = \mu(y)$, a equação torna-se
+\begin{gather*}
+\mu' M + \mu \frac{\partial M}{\partial y} = 0 + \mu \frac{\partial N}{\partial t} \\
+M \mu' = \mu \left( \frac{\partial N}{\partial t} - \frac{\partial M}{\partial y} \right) \\
+\mu' = \mu \frac{\frac{\partial N}{\partial t} - \frac{\partial M}{\partial y}}{M} \\
+\end{gather*}
+
+Esta é uma \nameref{subsec: edo-ordem1-linear-homogenea}, que pode ser resolvida se, e só se
+
+\begin{gather*}
+\frac{\frac{\partial N}{\partial t} - \frac{\partial M}{\partial y}}{M} \quad \text{depender apenas de } y
+\end{gather*}
+
+Se assim for, ficamos então com
+
+\begin{gather*}
+\mu' + \left( - \frac{\frac{\partial N}{\partial t} - \frac{\partial M}{\partial y}}{M} \right) \mu = 0 \\
+\implies \mu(y) = e^{\int \frac{\frac{\partial N}{\partial t} - \frac{\partial M}{\partial y}}{M} dy}
+\end{gather*}
+
+\bigskip
+
+\begin{itemize}
+    \item Se conseguirmos encontrar um fator integrante $\mu(t)$ ou $\mu(y)$, fica-se então com uma \nameref{subsec: edo-ordem1-exata} que pode ser resolvida como visto anteriormente.
+\end{itemize}
+
+\paragraph{Método de resolução de uma equação redutível a exata}
+\begin{gather*}
+M(t,y) + N(t,y) \frac{dy}{dt} = 0
+\end{gather*}
+
+\begin{enumerate}
+    \item Verificar se é exata.
+    \begin{gather*}
+    \frac{\partial M}{\partial y} = \frac{\partial N}{\partial t}
+    \end{gather*}
+    
+    \begin{itemize}
+        \item Se for exata, seguir o \nameref{par: metodo-resolucao-edo-exata}.
+    \end{itemize}
+    
+    \item Se não for exata, aplicar o método do fator integrante.
+    \begin{gather*}
+    \mu(t,y) M(t,y) + \mu(t,y) N(t,y) \frac{dy}{dt} = 0
+    \end{gather*}
+
+    \item Procurar um fator integrante $\mu(t)$ ou $\mu(y)$.
+
+    \begin{gather*}
+    \frac{\frac{\partial M}{\partial y} - \frac{\partial N}{\partial t}}{N} \text{ depende apenas de } t \text{ então existe } \mu(t) \text{ tal que} \\
+    \mu'(t) = \mu(t) \frac{\frac{\partial M}{\partial y} - \frac{\partial N}{\partial t}}{N} \\
+    \mu'(t) + \left( - \frac{\frac{\partial M}{\partial y} - \frac{\partial N}{\partial t}}{N} \right) \mu(t) = 0 \\
+    \implies \mu(t) = e^{\int \frac{\frac{\partial M}{\partial y} - \frac{\partial N}{\partial t}}{N} dt}
+    \end{gather*}
+
+    \begin{gather*}
+    \frac{\frac{\partial N}{\partial t} - \frac{\partial M}{\partial y}}{M} \text{ depende apenas de } y \text{ então existe } \mu(y) \text{ tal que} \\
+    \mu'(y) = \mu(y) \frac{\frac{\partial N}{\partial t} - \frac{\partial M}{\partial y}}{M} \\
+    \mu'(y) + \left( - \frac{\frac{\partial N}{\partial t} - \frac{\partial M}{\partial y}}{M} \right) \mu(y) = 0 \\
+    \implies \mu(y) = e^{\int \frac{\frac{\partial N}{\partial t} - \frac{\partial M}{\partial y}}{M} dy}
+    \end{gather*}
+
+    \medskip
+
+    \item Se existir um fator integrante $\mu$, encontrar a função $\phi(t,y)$, tal que
+    \begin{gather*}
+    \begin{dcases}
+    \frac{\partial \phi}{\partial t} = \mu M \implies \phi = \int \mu M dt + c_1(y) \\
+    \frac{\partial \phi}{\partial y} = \mu N \implies \phi = \int \mu N dy + c_2(t)
+    \end{dcases}
+    \end{gather*}
+
+    Basta calcular uma das equações, e depois determinar o seu termo $c$.
+
+    \item A solução é dada implicitamente por:
+    \begin{gather*}
+    \phi(t,y) = c, \quad c \in \mathbb{R}
+    \end{gather*}
+
+\end{enumerate}
+
+
+
+
+\end{document}
+
