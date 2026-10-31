@@ -28,6 +28,8 @@
     right=28mm,
 }
 
+\graphicspath{{fig/}}
+
 % -------------------------------------------------------
 
 \begin{document}
@@ -42,6 +44,7 @@ um guia de consulta rápida, em vez de um texto explicativo detalhado.}
 
 
 \renewcommand{\contentsname}{Índice}
+\renewcommand{\figurename}{Figura}
 \tableofcontents
 
 
@@ -524,8 +527,8 @@ então o seu limite é solução do PVI nesse intervalo:
 
 \begin{itemize}
     \item Nota: esta convergência não está garantida para qualquer $f$.
-    Veremos adiante condições sobre $f$ que a garantem (por exemplo, basta que $f$ e
-    $\frac{\partial f}{\partial y}$ sejam contínuas numa vizinhança de $(t_0, y_0)$).
+    As condições sobre $f$ que a garantem são dadas pelo
+    \nameref{subsubsec: teorema-existencia-unicidade-picard}.
 \end{itemize}
 
 \paragraph{Exemplo}
@@ -587,6 +590,62 @@ Neste caso, a sucessão converge para todo o $t \in \mathbb{R}$ e o seu limite �
 
 \begin{itemize}
     \item Verificação: $y(t) = e^t$ satisfaz $y' = e^t = y$ e $y(0) = e^0 = 1$.
+\end{itemize}
+
+\bigskip
+
+\subsubsection{Teorema de Existência e Unicidade de Picard}
+\label{subsubsec: teorema-existencia-unicidade-picard}
+
+\begin{gather*}
+\begin{dcases}
+\frac{dy}{dt} = f(t, y) \\
+y(t_0) = y_0
+\end{dcases}
+\end{gather*}
+
+Seja $R = [\alpha, \beta] \times [\gamma, \delta]$ um retângulo fechado que contém o ponto $(t_0, y_0)$,
+com $\alpha \leq t_0 < \beta$ e $\gamma < y_0 < \delta$, e sejam
+
+\begin{gather*}
+a = \beta - t_0, \quad b_1 = \delta - y_0, \quad b_2 = y_0 - \gamma, \quad
+b = \min\{b_1, b_2\}, \quad M = \max_{(t,y) \in R} |f(t,y)|
+\end{gather*}
+
+\paragraph{Teorema}
+Se $f$ e $\frac{\partial f}{\partial y}$ são contínuas em $R$, então o PVI tem uma \textbf{única} solução
+$y = \phi(t)$ definida no intervalo $[t_0, t_0 + \theta]$, onde
+
+\begin{gather*}
+\boxed{\theta = \min\left\{a, \frac{b}{M}\right\}}
+\end{gather*}
+
+Além disso, esta solução é o limite da sucessão das iteradas do \nameref{subsubsec: metodo-iterativo-picard}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{picard_rectangle}
+% \caption{Retângulo $R$ e solução $y(t)$ do PVI no intervalo $[t_0, t_0 + \theta]$.}
+\end{figure}
+
+\begin{itemize}
+    \item $M$ existe porque $f$ é contínua no conjunto fechado e limitado $R$ (Teorema de Weierstrass).
+    Se $M = 0$, toma-se $\theta = a$.
+
+    \item Escolha de $\theta$: enquanto a solução está em $R$, temos $|y'(t)| = |f(t, y(t))| \leq M$, logo
+    \begin{gather*}
+    |y(t) - y_0| \leq M (t - t_0) \leq M \theta \leq b, \quad t \in [t_0, t_0 + \theta]
+    \end{gather*}
+    Ou seja, $\theta \leq a$ garante que $t$ não sai de $[\alpha, \beta]$ e $\theta \leq \frac{b}{M}$ garante
+    que $y$ não sai de $[y_0 - b, y_0 + b] \subseteq [\gamma, \delta]$.
+    Usa-se $b = \min\{b_1, b_2\}$ porque a solução pode tanto subir como descer.
+
+    \item O teorema é \textbf{local}: só garante a solução perto de $t_0$, e $\theta$ pode ser muito menor que $a$.
+
+    \item Se $\alpha < t_0$, o mesmo resultado vale à esquerda de $t_0$, no intervalo $[t_0 - \theta, t_0]$,
+    tomando $a = t_0 - \alpha$.
+
+    \item Se apenas $f$ for contínua, garante-se a existência de solução, mas não a unicidade.
 \end{itemize}
 
 
