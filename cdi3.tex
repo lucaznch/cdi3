@@ -736,6 +736,42 @@ então
     em $I$. Por isso, basta verificar que $W(y_1, y_2)(t_0) \neq 0$ num único ponto $t_0 \in I$.
 \end{itemize}
 
+\paragraph{Estratégia Geral para resolver uma equação não homogénea}
+
+\begin{gather*}
+\boxed{y'' + p(t)y' + q(t)y = g(t)}
+\end{gather*}
+
+\begin{enumerate}
+    \item Resolver a equação homogénea associada, $y'' + p(t)y' + q(t)y = 0$, obtendo
+    \begin{gather*}
+    y_h = c_1 y_1 + c_2 y_2, \quad c_1, c_2 \in \mathbb{R}
+    \end{gather*}
+
+    \item Procurar uma solução particular $y_p$ da equação original (não homogénea).
+    Para obter $y_p$ podemos usar 2 métodos:
+    \begin{itemize}
+        \item \textbf{\nameref{subsec: metodo-coeficientes-indeterminados}} (ou Método do Aniquilador)
+        \begin{itemize}
+            \item Usa aniquiladores.
+            \item Fácil de aplicar (só envolve derivadas).
+            \item Várias restrições: serve apenas para equações com coeficientes constantes e quando $g(t)$
+            é uma soma de produtos de polinómios, exponenciais, senos e cossenos.
+        \end{itemize}
+        \item \textbf{Método de Variação dos Parâmetros}
+        \begin{itemize}
+            \item Mais difícil de aplicar (envolve primitivas).
+            \item Poucas restrições: basta conhecer $y_1$, $y_2$ e que $g(t)$ seja contínua.
+            \item Não é apresentado nestes resumos.
+        \end{itemize}
+    \end{itemize}
+
+    \item A solução geral é dada por
+    \begin{gather*}
+    \boxed{y = y_h + y_p = c_1 y_1 + c_2 y_2 + y_p, \quad c_1, c_2 \in \mathbb{R}}
+    \end{gather*}
+\end{enumerate}
+
 \bigskip
 
 \subsection{Equação Diferencial Ordinária de 2ª Ordem Linear Homogénea com Coeficientes Constantes}
@@ -875,6 +911,226 @@ logo as duas soluções são linearmente independentes e a solução geral da eq
 \begin{gather*}
 \boxed{y(t) = c_1 e^{\alpha t} \cos(\beta t) + c_2 e^{\alpha t} \sin(\beta t), \quad c_1, c_2 \in \mathbb{R}}
 \end{gather*}
+
+\bigskip
+
+\subsection{Equação Diferencial Ordinária de Ordem Superior a Dois Linear Homogénea com Coeficientes Constantes}
+\label{subsec: edo-ordem-n-linear-homogenea-coef-constantes}
+
+A forma geral de uma equação diferencial ordinária linear homogénea de ordem $n$ é
+
+\begin{gather*}
+a_n(t) \frac{d^n y}{dt^n} + a_{n-1}(t) \frac{d^{n-1} y}{dt^{n-1}} + \ldots + a_1(t) \frac{dy}{dt} + a_0(t) y = 0
+\end{gather*}
+
+No entanto, vamos focar-nos em equações com coeficientes constantes:
+
+\begin{gather*}
+\boxed{a_n y^{(n)} + a_{n-1} y^{(n-1)} + \ldots + a_1 y' + a_0 y = 0, \quad a_0, \ldots, a_n \in \mathbb{R}, \quad a_n \neq 0}
+\end{gather*}
+
+Tal como na \nameref{subsec: edo-ordem2-linear-homogenea-coef-constantes}, procuramos soluções da
+forma $y = e^{rt}$, obtendo a equação característica
+
+\begin{gather*}
+a_n r^n + a_{n-1} r^{n-1} + \ldots + a_1 r + a_0 = 0
+\end{gather*}
+
+Para obter a solução geral de uma equação de ordem $n$, precisamos de $n$ soluções linearmente
+independentes, $y_1, \ldots, y_n$ (ou seja, $W(y_1, \ldots, y_n) \neq 0$), e então
+
+\begin{gather*}
+\boxed{y(t) = c_1 y_1(t) + c_2 y_2(t) + \ldots + c_n y_n(t), \quad c_1, \ldots, c_n \in \mathbb{R}}
+\end{gather*}
+
+A equação característica tem $n$ raízes (contando com a multiplicidade), que dão origem às $n$ soluções
+linearmente independentes.
+
+\smallskip
+
+Uma raiz real $r$ de multiplicidade $m$ dá origem a $m$ soluções:
+
+\begin{itemize}
+    \item $y_1 = e^{rt}$
+    \item $y_2 = t e^{rt}$
+    \item \ldots
+    \item $y_m = t^{m-1} e^{rt}$
+\end{itemize}
+
+Um par de raízes complexas conjugadas $\alpha \pm i \beta$, cada uma de multiplicidade $m$, dá origem a
+$2m$ soluções:
+
+\begin{itemize}
+    \item $y_1 = e^{\alpha t} \cos(\beta t), \quad y_2 = t e^{\alpha t} \cos(\beta t), \quad \ldots, \quad
+    y_m = t^{m-1} e^{\alpha t} \cos(\beta t)$
+    \item $y_{m+1} = e^{\alpha t} \sin(\beta t), \quad y_{m+2} = t e^{\alpha t} \sin(\beta t), \quad \ldots, \quad
+    y_{2m} = t^{m-1} e^{\alpha t} \sin(\beta t)$
+\end{itemize}
+
+\begin{itemize}
+    \item Nota: para encontrar as raízes, fatoriza-se o polinómio característico com a Regra de Ruffini.
+    Se os coeficientes forem inteiros, as raízes inteiras são divisores de $a_0$.
+\end{itemize}
+
+\paragraph{Exemplo}
+
+\begin{gather*}
+y''' + 3y'' + 3y' + y = 0
+\end{gather*}
+
+A equação característica é
+
+\begin{gather*}
+r^3 + 3r^2 + 3r + 1 = 0
+\end{gather*}
+
+Testando os divisores de $a_0 = 1$, vemos que $r = -1$ é raiz. Aplicando a Regra de Ruffini duas vezes:
+
+\begin{gather*}
+\begin{array}{r|rrrr}
+   & 1 & 3  & 3  & 1  \\
+-1 &   & -1 & -2 & -1 \\
+\hline
+   & 1 & 2  & 1  & 0
+\end{array}
+\qquad \qquad
+\begin{array}{r|rrr}
+   & 1 & 2  & 1  \\
+-1 &   & -1 & -1 \\
+\hline
+   & 1 & 1  & 0
+\end{array}
+\end{gather*}
+
+\begin{align*}
+& r^3 + 3r^2 + 3r + 1 = 0 \\
+\Leftrightarrow \ & (r + 1)(r^2 + 2r + 1) = 0 \\
+\Leftrightarrow \ & (r + 1)(r + 1)(r + 1) = 0 \\
+\Leftrightarrow \ & (r + 1)^3 = 0
+\end{align*}
+
+Logo, $r = -1$ é uma raiz real de multiplicidade 3, e a solução geral é
+
+\begin{gather*}
+\boxed{y(t) = c_1 e^{-t} + c_2 t e^{-t} + c_3 t^2 e^{-t}, \quad c_1, c_2, c_3 \in \mathbb{R}}
+\end{gather*}
+
+\bigskip
+
+\subsection{Método dos Coeficientes Indeterminados}
+\label{subsec: metodo-coeficientes-indeterminados}
+
+Seja $D$ o operador derivada:
+
+\begin{itemize}
+    \item $Dy = y'$
+    \item $D^2 y = y''$
+    \item \ldots
+    \item $D^n y = y^{(n)}$
+\end{itemize}
+
+Um \textbf{aniquilador} de uma função $f(t)$ é um operador, dado por um polinómio em $D$ com coeficientes
+constantes, que, quando aplicado a $f(t)$, produz a função nula.
+
+\smallskip
+
+Este método determina o aniquilador de $g(t)$ para transformar a equação original, não homogénea de
+ordem 2, numa equação homogénea de ordem superior a dois (que se resolve como na
+\nameref{subsec: edo-ordem-n-linear-homogenea-coef-constantes}).
+
+\paragraph{Aniquiladores de funções elementares}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|c|c|}
+\hline
+Função $f(t)$ & Aniquilador \\
+\hline
+$t^m$ & $D^{m+1}$ \\
+$e^{\alpha t}$ & $D - \alpha$ \\
+$t e^{\alpha t}$ & $(D - \alpha)^2$ \\
+$t^m e^{\alpha t}$ & $(D - \alpha)^{m+1}$ \\
+$\cos(\beta t)$ & $D^2 + \beta^2$ \\
+$\sin(\beta t)$ & $D^2 + \beta^2$ \\
+$t^m \cos(\beta t)$ & $(D^2 + \beta^2)^{m+1}$ \\
+$t^m \sin(\beta t)$ & $(D^2 + \beta^2)^{m+1}$ \\
+$e^{\alpha t} \cos(\beta t)$ & $(D - \alpha)^2 + \beta^2$ \\
+$e^{\alpha t} \sin(\beta t)$ & $(D - \alpha)^2 + \beta^2$ \\
+$t^m e^{\alpha t} \cos(\beta t)$ & $\left[ (D - \alpha)^2 + \beta^2 \right]^{m+1}$ \\
+$t^m e^{\alpha t} \sin(\beta t)$ & $\left[ (D - \alpha)^2 + \beta^2 \right]^{m+1}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{itemize}
+    \item O aniquilador de $t^m e^{\alpha t}$ também aniquila $e^{\alpha t}, t e^{\alpha t}, \ldots,
+    t^{m-1} e^{\alpha t}$ (e analogamente para senos e cossenos).
+    Por exemplo, um polinómio de grau $m$ é aniquilado por $D^{m+1}$.
+\end{itemize}
+
+O aniquilador de uma soma de funções é o produto dos aniquiladores de cada uma:
+
+\begin{gather*}
+f(t) = u(t) + v(t) \implies D_f = D_u D_v
+\end{gather*}
+
+\begin{itemize}
+    \item Se $D_u$ e $D_v$ tiverem fatores em comum, basta incluí-los uma vez. Por exemplo,
+    $\cos(\beta t) + \sin(\beta t)$ é aniquilada por $D^2 + \beta^2$.
+\end{itemize}
+
+\paragraph{Aplicar o Método}
+
+\begin{gather*}
+\boxed{ay'' + by' + cy = g(t)}
+\end{gather*}
+
+\begin{enumerate}
+    \item Determinar $y_h = c_1 y_1 + c_2 y_2$, resolvendo $ay'' + by' + cy = 0$
+    (com as raízes $r_1$ e $r_2$ de $ar^2 + br + c$).
+
+    \item Determinar o aniquilador de $g(t)$, $D_g$.
+
+    \item Escrever a equação com o operador $D$ e aplicar o aniquilador:
+    \begin{gather*}
+    aD^2 y + bDy + cy = g(t)
+    \Leftrightarrow (aD^2 + bD + c) y = g(t)
+    \implies D_g (aD^2 + bD + c) y = 0
+    \end{gather*}
+    Obtém-se uma equação homogénea de ordem superior a dois, cuja equação característica é
+    \begin{gather*}
+    P_g(r) (ar^2 + br + c) = 0
+    \end{gather*}
+    onde $P_g(r)$ é o polinómio que se obtém substituindo $D$ por $r$ em $D_g$.
+
+    \item Determinar as raízes de $P_g(r)$ (as de $ar^2 + br + c$ já são conhecidas do passo 1).
+    Se uma raiz de $P_g(r)$ também for raiz de $ar^2 + br + c$, as multiplicidades somam-se.
+
+    \item Obter a forma de $y_p$. A solução geral da equação homogénea de ordem superior é
+    \begin{gather*}
+    y = c_1 y_1 + c_2 y_2 + A y_3 + B y_4 + \ldots
+    \end{gather*}
+    onde $y_3, y_4, \ldots$ são as soluções que vêm das raízes de $P_g(r)$.
+    Como $c_1 y_1 + c_2 y_2 = y_h$ é solução da equação homogénea (ou seja, dá $0$ e não $g(t)$),
+    excluem-se esses termos:
+    \begin{gather*}
+    \boxed{y_p = A y_3 + B y_4 + \ldots}
+    \end{gather*}
+
+    % Usam-se, de propósito, os coeficientes A, B, C, etc. e não c_1, c_2, etc.
+
+    \item Determinar os coeficientes $A, B, \ldots$: calcular $y_p'$ e $y_p''$, substituir em
+    $ay_p'' + by_p' + cy_p = g(t)$ e igualar os coeficientes dos termos semelhantes.
+
+    \item A solução geral é $y = y_h + y_p$.
+\end{enumerate}
+
+\begin{itemize}
+    \item Nota: por exemplo, em $y'' - y = e^t$, temos $ar^2 + br + c = (r - 1)(r + 1)$ e $D_g = D - 1$,
+    logo $(r - 1)^2 (r + 1) = 0$ e as soluções são $e^t$, $t e^t$ e $e^{-t}$.
+    Excluindo os termos de $y_h = c_1 e^t + c_2 e^{-t}$, fica $y_p = A t e^t$ (e não $A e^t$).
+\end{itemize}
+
 
 
 \end{document}
