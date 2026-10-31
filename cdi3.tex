@@ -439,6 +439,155 @@ M(t,y) + N(t,y) \frac{dy}{dt} = 0
 
 \end{enumerate}
 
+\bigskip
+
+\subsection{Análise Qualitativa de Equações Diferenciais Ordinárias de 1ª Ordem}
+
+\subsubsection{Método Iterativo de Picard}
+\label{subsubsec: metodo-iterativo-picard}
+
+\noindent
+\begin{minipage}{0.3\textwidth}
+\begin{gather*}
+\begin{dcases}
+\frac{dy}{dt} = f(t, y) \\
+y(t_0) = y_0
+\end{dcases}
+\end{gather*}
+\end{minipage}
+\hfill
+\begin{minipage}{0.65\textwidth}
+Para o problema de valor inicial, dependendo da forma de $f(t,y)$, nem sempre
+conseguimos resolver explicitamente a equação e obter uma solução.
+Vamos então procurar condições que garantam a \textbf{existência} e a \textbf{unicidade}
+de solução num intervalo que contenha $t_0$.
+\end{minipage}
+
+\bigskip
+
+A ideia é aproximar sucessivamente a solução da equação por funções que não são
+soluções, mas tais que o erro de aproximação é cada vez menor.
+
+\smallskip
+
+Se $f$ for contínua, integrando a equação entre $t_0$ e $t$, obtemos
+
+\begin{gather*}
+\begin{dcases}
+\frac{dy}{dt} = f(t, y) \\
+y(t_0) = y_0
+\end{dcases}
+\Leftrightarrow
+\begin{dcases}
+\int_{t_0}^{t} y'(s) \, ds = \int_{t_0}^{t} f(s, y(s)) \, ds \\
+y(t_0) = y_0
+\end{dcases}
+\Leftrightarrow
+\begin{dcases}
+y(t) - y(t_0) = \int_{t_0}^{t} f(s, y(s)) \, ds \\
+y(t_0) = y_0
+\end{dcases}
+\end{gather*}
+
+Ou seja, o PVI é equivalente à equação integral
+
+\begin{gather*}
+\boxed{y(t) = y_0 + \int_{t_0}^{t} f(s, y(s)) \, ds}
+\end{gather*}
+
+\begin{itemize}
+    \item Nota: a condição inicial já está incluída nesta equação, pois para $t = t_0$ o integral é nulo e $y(t_0) = y_0$.
+\end{itemize}
+
+\smallskip
+
+O \textbf{método iterativo de Picard} consiste em construir uma sucessão de funções $\{y_n\}$
+e ver em que casos podemos garantir que o seu limite é uma solução do PVI.
+
+\smallskip
+
+A equação integral anterior permite-nos definir iterativamente a sucessão $\{y_n\}$:
+
+\newpage
+
+\begin{itemize}
+    \item $y_0(t) = y_0$ (função constante igual à condição inicial), para $n = 0$.
+    \item $y_n(t) = y_0 + \int_{t_0}^{t} f(s, y_{n-1}(s)) \, ds$, para $n \geq 1$.
+\end{itemize}
+
+Se a sucessão de funções $y_n(t)$ convergir (uniformemente) num intervalo que contém $t_0$,
+então o seu limite é solução do PVI nesse intervalo:
+
+\begin{gather*}
+\boxed{y(t) = \lim_{n \to \infty} y_n(t)}
+\end{gather*}
+
+\begin{itemize}
+    \item Nota: esta convergência não está garantida para qualquer $f$.
+    Veremos adiante condições sobre $f$ que a garantem (por exemplo, basta que $f$ e
+    $\frac{\partial f}{\partial y}$ sejam contínuas numa vizinhança de $(t_0, y_0)$).
+\end{itemize}
+
+\paragraph{Exemplo}
+
+\begin{gather*}
+\begin{dcases}
+y' = y \\
+y(0) = 1
+\end{dcases}
+%\quad \text{onde} \quad f(t,y) = y, \quad t_0 = 0, \quad y_0 = 1
+\end{gather*}
+
+Para $n = 0$:
+
+\begin{gather*}
+y_0(t) = 1
+\end{gather*}
+
+Para $n = 1$:
+
+\begin{gather*}
+y_1(t) = 1 + \int_{0}^{t} f(s, y_0(s)) \, ds = 1 + \int_{0}^{t} 1 \, ds = 1 + \Big[ s \Big]_{0}^{t} = 1 + t
+\end{gather*}
+
+Para $n = 2$:
+
+\begin{gather*}
+y_2(t) = 1 + \int_{0}^{t} f(s, y_1(s)) \, ds = 1 + \int_{0}^{t} (1 + s) \, ds
+= 1 + \Big[ s + \frac{s^2}{2} \Big]_{0}^{t} = 1 + t + \frac{t^2}{2}
+\end{gather*}
+
+Para $n = 3$:
+
+\begin{gather*}
+y_3(t) = 1 + \int_{0}^{t} f(s, y_2(s)) \, ds = 1 + \int_{0}^{t} \left( 1 + s + \frac{s^2}{2} \right) ds
+= 1 + \Big[ s + \frac{s^2}{2} + \frac{s^3}{3!} \Big]_{0}^{t} = 1 + t + \frac{t^2}{2} + \frac{t^3}{3!}
+\end{gather*}
+
+As iteradas sugerem que, em geral,
+
+\begin{gather*}
+\boxed{y_n(t) = \sum_{k=0}^{n} \frac{t^k}{k!}}
+\end{gather*}
+
+que é o polinómio de Taylor de ordem $n$ de $e^t$ em torno de $t = 0$.
+De facto, por indução,
+
+\begin{gather*}
+y_{n+1}(t) = 1 + \int_{0}^{t} \sum_{k=0}^{n} \frac{s^k}{k!} \, ds
+= 1 + \sum_{k=0}^{n} \frac{t^{k+1}}{(k+1)!}
+= \sum_{k=0}^{n+1} \frac{t^k}{k!}
+\end{gather*}
+
+Neste caso, a sucessão converge para todo o $t \in \mathbb{R}$ e o seu limite é a série de Taylor de $e^t$:
+
+\begin{gather*}
+\boxed{y(t) = \lim_{n \to \infty} y_n(t) = \sum_{k=0}^{+\infty} \frac{t^k}{k!} = e^t}
+\end{gather*}
+
+\begin{itemize}
+    \item Verificação: $y(t) = e^t$ satisfaz $y' = e^t = y$ e $y(0) = e^0 = 1$.
+\end{itemize}
 
 
 
