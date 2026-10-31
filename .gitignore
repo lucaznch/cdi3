@@ -9,3 +9,5 @@
 *.synctex.gz
 *.pdf
 
+# Generated figures are committed (CI only has LaTeX)
+!fig/*.pdf
