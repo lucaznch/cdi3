@@ -648,6 +648,233 @@ Além disso, esta solução é o limite da sucessão das iteradas do \nameref{su
     \item Se apenas $f$ for contínua, garante-se a existência de solução, mas não a unicidade.
 \end{itemize}
 
+\newpage
+
+
+\section{Equações Diferenciais Ordinárias de Ordem Superior a Um}
+
+\subsection{Equação Diferencial Ordinária de 2ª Ordem Linear}
+\label{subsec: edo-ordem2-linear}
+
+\begin{gather*}
+\boxed{\frac{d^2y}{dt^2} + p(t)\frac{dy}{dt} + q(t)y = g(t)}
+\end{gather*}
+
+\begin{itemize}
+    \item A equação é homogénea se $g(t) = 0$ e não homogénea se $g(t) \neq 0$.
+\end{itemize}
+
+Para determinar uma única solução precisamos de 2 condições iniciais, por exemplo,
+$y(t_0) = y_0$ e $y'(t_0) = y_0'$.
+
+\paragraph{Teorema de Existência e Unicidade}
+
+\begin{gather*}
+\begin{dcases}
+y'' + p(t)y' + q(t)y = g(t) \\
+y(t_0) = y_0 \\
+y'(t_0) = y_0'
+\end{dcases}
+\end{gather*}
+
+Se $p(t)$, $q(t)$ e $g(t)$ são contínuas num intervalo aberto $I$ que contém $t_0$, então o PVI tem
+uma \textbf{única} solução, definida em todo o intervalo $I$.
+
+\begin{itemize}
+    \item Ao contrário do \nameref{subsubsec: teorema-existencia-unicidade-picard}, este resultado não é
+    local: a solução existe em todo o intervalo $I$ onde os coeficientes são contínuos.
+\end{itemize}
+
+\paragraph{Wronskiano e Independência Linear}
+
+Dadas $n$ funções $y_1(t), y_2(t), \ldots, y_n(t)$, $(n-1)$ vezes diferenciáveis num intervalo $I$,
+o \textbf{Wronskiano} destas funções é o determinante da matriz composta por essas funções e
+pelas suas derivadas:
+
+\begin{gather*}
+W(y_1, y_2, \ldots, y_n)(t) =
+\begin{vmatrix}
+y_1 & y_2 & \cdots & y_n \\
+y_1' & y_2' & \cdots & y_n' \\
+\vdots & \vdots & \ddots & \vdots \\
+y_1^{(n-1)} & y_2^{(n-1)} & \cdots & y_n^{(n-1)}
+\end{vmatrix}
+\end{gather*}
+
+\begin{gather*}
+\boxed{\exists \, t_0 \in I : W(y_1, y_2, \ldots, y_n)(t_0) \neq 0 \implies y_1, y_2, \ldots, y_n
+\text{ são linearmente independentes em } I}
+\end{gather*}
+
+\paragraph{Teorema}
+
+Sejam $y_1$ e $y_2$ duas soluções da equação homogénea $y'' + p(t)y' + q(t)y = 0$, com $p(t)$ e $q(t)$
+contínuas num intervalo aberto $I$. Se
+
+\begin{gather*}
+W(y_1, y_2)(t) =
+\begin{vmatrix}
+y_1 & y_2 \\
+y_1' & y_2'
+\end{vmatrix}
+= y_1 y_2' - y_2 y_1' \neq 0 \text{ em } I
+\end{gather*}
+
+então
+
+\begin{gather*}
+\boxed{y(t) = c_1 y_1(t) + c_2 y_2(t), \quad c_1, c_2 \in \mathbb{R}}
+\end{gather*}
+
+é a \textbf{solução geral} da equação.
+
+\begin{itemize}
+    \item $\{y_1, y_2\}$ é chamado um \textbf{conjunto fundamental de soluções}.
+    \item Qualquer combinação linear de soluções da equação homogénea é também solução
+    (princípio da sobreposição).
+    \item Para duas soluções da equação homogénea, o Wronskiano ou é nulo em todo o $I$, ou nunca se anula
+    em $I$. Por isso, basta verificar que $W(y_1, y_2)(t_0) \neq 0$ num único ponto $t_0 \in I$.
+\end{itemize}
+
+\bigskip
+
+\subsection{Equação Diferencial Ordinária de 2ª Ordem Linear Homogénea com Coeficientes Constantes}
+\label{subsec: edo-ordem2-linear-homogenea-coef-constantes}
+
+\begin{gather*}
+\boxed{ay'' + by' + cy = 0, \quad a, b, c \in \mathbb{R}, \quad a \neq 0}
+\end{gather*}
+
+Como a derivada de uma exponencial é proporcional à própria exponencial, faz sentido
+procurar soluções da forma $y = e^{rt}$, onde $r$ é um parâmetro a determinar:
+
+\begin{align*}
+& ay'' + by' + cy = 0 \\
+\Leftrightarrow \ & a \left( e^{rt} \right)'' + b \left( e^{rt} \right)' + c e^{rt} = 0 \\
+\Leftrightarrow \ & a r^2 e^{rt} + b r e^{rt} + c e^{rt} = 0 \\
+\Leftrightarrow \ & \left( a r^2 + b r + c \right) e^{rt} = 0 \\
+\Leftrightarrow \ & a r^2 + b r + c = 0 \quad \text{pois } e^{rt} \neq 0 \\
+\Leftrightarrow \ & r = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} = \frac{-b \pm \sqrt{\Delta}}{2a}
+\end{align*}
+
+\begin{itemize}
+    \item $a r^2 + b r + c = 0$ é a \textbf{equação característica} e $a r^2 + b r + c$ o
+    \textbf{polinómio característico}.
+\end{itemize}
+
+\paragraph{$\Delta > 0$: duas raízes reais distintas}
+
+\begin{gather*}
+r_1 = \frac{-b - \sqrt{\Delta}}{2a} \quad \text{e} \quad r_2 = \frac{-b + \sqrt{\Delta}}{2a}
+\end{gather*}
+
+As duas raízes correspondem a duas soluções da equação:
+
+\begin{gather*}
+\begin{dcases}
+y_1 = e^{r_1 t} \\
+y_2 = e^{r_2 t}
+\end{dcases}
+\end{gather*}
+
+Tendo que
+
+\begin{gather*}
+W(y_1, y_2)(t) =
+\begin{vmatrix}
+e^{r_1 t} & e^{r_2 t} \\
+r_1 e^{r_1 t} & r_2 e^{r_2 t}
+\end{vmatrix}
+= (r_2 - r_1) e^{(r_1 + r_2)t} \neq 0 \quad \text{pois } r_1 \neq r_2
+\end{gather*}
+
+logo as duas soluções são linearmente independentes e a solução geral da equação é
+
+\begin{gather*}
+\boxed{y(t) = c_1 e^{r_1 t} + c_2 e^{r_2 t}, \quad c_1, c_2 \in \mathbb{R}}
+\end{gather*}
+
+\paragraph{$\Delta = 0$: uma raiz real dupla}
+
+\begin{gather*}
+r = -\frac{b}{2a}
+\end{gather*}
+
+Esta raiz corresponde a uma solução da equação, $y_1 = e^{rt}$.
+Precisamos de mais uma solução, linearmente independente de $y_1$, para aplicar o Teorema anterior
+e obter a solução geral.
+Para isso usa-se o \textbf{método de redução de ordem} (que não é apresentado aqui), obtendo-se
+
+\begin{gather*}
+y_2 = t e^{rt}
+\end{gather*}
+
+Tendo que
+
+\begin{gather*}
+W(y_1, y_2)(t) =
+\begin{vmatrix}
+e^{rt} & t e^{rt} \\
+r e^{rt} & e^{rt} + r t e^{rt}
+\end{vmatrix}
+= e^{2rt} \neq 0
+\end{gather*}
+
+logo as duas soluções são linearmente independentes e a solução geral da equação é
+
+\begin{gather*}
+\boxed{y(t) = c_1 e^{rt} + c_2 t e^{rt}, \quad c_1, c_2 \in \mathbb{R}}
+\end{gather*}
+
+\paragraph{$\Delta < 0$: duas raízes complexas conjugadas}
+
+\begin{gather*}
+r_1 = \alpha - i \beta \quad \text{e} \quad r_2 = \alpha + i \beta,
+\quad \text{com } \alpha = -\frac{b}{2a} \text{ e } \beta = \frac{\sqrt{-\Delta}}{2a}
+\end{gather*}
+
+As duas raízes correspondem a duas soluções da equação:
+
+\begin{gather*}
+\begin{dcases}
+y_1 = e^{(\alpha - i \beta) t} \\
+y_2 = e^{(\alpha + i \beta) t}
+\end{dcases}
+\end{gather*}
+
+No entanto, estas soluções são complexas. Como a equação tem coeficientes reais, queremos soluções reais.
+Usando a fórmula de Euler, $e^{i \theta} = \cos(\theta) + i \sin(\theta)$, temos
+
+\begin{gather*}
+e^{(\alpha \pm i \beta) t} = e^{\alpha t} \left( \cos(\beta t) \pm i \sin(\beta t) \right)
+\end{gather*}
+
+e (sem demonstrar) as partes real e imaginária desta exponencial são também soluções da equação:
+
+\begin{gather*}
+\begin{dcases}
+y_1 = \operatorname{Re}\left[ e^{(\alpha + i \beta) t} \right] = e^{\alpha t} \cos(\beta t) \\
+y_2 = \operatorname{Im}\left[ e^{(\alpha + i \beta) t} \right] = e^{\alpha t} \sin(\beta t)
+\end{dcases}
+\end{gather*}
+
+Tendo que
+
+\begin{gather*}
+W(y_1, y_2)(t) =
+\begin{vmatrix}
+e^{\alpha t} \cos(\beta t) & e^{\alpha t} \sin(\beta t) \\
+e^{\alpha t} \left( \alpha \cos(\beta t) - \beta \sin(\beta t) \right) &
+e^{\alpha t} \left( \alpha \sin(\beta t) + \beta \cos(\beta t) \right)
+\end{vmatrix}
+= \beta e^{2 \alpha t} \neq 0 \quad \text{pois } \beta \neq 0
+\end{gather*}
+
+logo as duas soluções são linearmente independentes e a solução geral da equação é
+
+\begin{gather*}
+\boxed{y(t) = c_1 e^{\alpha t} \cos(\beta t) + c_2 e^{\alpha t} \sin(\beta t), \quad c_1, c_2 \in \mathbb{R}}
+\end{gather*}
 
 
 \end{document}
