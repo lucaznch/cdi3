@@ -1131,7 +1131,1768 @@ f(t) = u(t) + v(t) \implies D_f = D_u D_v
     Excluindo os termos de $y_h = c_1 e^t + c_2 e^{-t}$, fica $y_p = A t e^t$ (e não $A e^t$).
 \end{itemize}
 
+\newpage
+
+\section{Sistemas de Equações Diferenciais Ordinárias de Primeira Ordem Lineares}
+\label{sec: sistemas-edo-ordem1-lineares}
+
+\begin{gather*}
+\begin{dcases}
+x_1' = a_{11}(t)x_1 + a_{12}(t)x_2 + \cdots + a_{1n}(t)x_n + g_1(t) \\
+x_2' = a_{21}(t)x_1 + a_{22}(t)x_2 + \cdots + a_{2n}(t)x_n + g_2(t) \\
+\vdots \\
+x_n' = a_{n1}(t)x_1 + a_{n2}(t)x_2 + \cdots + a_{nn}(t)x_n + g_n(t)
+\end{dcases}
+\end{gather*}
+
+Estudaremos sistemas desta forma: $n$ equações diferenciais ordinárias de primeira ordem lineares,
+que envolvem as mesmas $n$ variáveis dependentes, $x_1(t), x_2(t), \ldots, x_n(t)$, e uma única variável
+independente, $t$.
+
+Na forma matricial, o sistema escreve-se
+
+\begin{gather*}
+\begin{bmatrix}
+x_1' \\
+x_2' \\
+\vdots \\
+x_n'
+\end{bmatrix}
+=
+\begin{bmatrix}
+a_{11}(t) & a_{12}(t) & \cdots & a_{1n}(t) \\
+a_{21}(t) & a_{22}(t) & \cdots & a_{2n}(t) \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{n1}(t) & a_{n2}(t) & \cdots & a_{nn}(t)
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+\vdots \\
+x_n
+\end{bmatrix}
++
+\begin{bmatrix}
+g_1(t) \\
+g_2(t) \\
+\vdots \\
+g_n(t)
+\end{bmatrix}
+\Leftrightarrow
+\boxed{\frac{d\vec{x}}{dt} = A(t)\vec{x} + \vec{g}(t)}
+\end{gather*}
+
+\begin{itemize}
+    \item $A(t)$ é a matriz dos coeficientes ($n \times n$), $\vec{x}$ é o vetor das incógnitas e
+    $\vec{g}(t)$ é o vetor dos termos independentes.
+    \item O sistema é homogéneo se $\vec{g}(t) = \vec{0}$ e não homogéneo se $\vec{g}(t) \neq \vec{0}$.
+    \item Nota: vamos lidar só com o caso de coeficientes constantes, ou seja, $A$ é uma matriz real
+    que não depende de $t$ (já $\vec{g}(t)$ pode depender de $t$).
+\end{itemize}
+
+Uma solução do sistema é constituída por $n$ funções diferenciáveis que satisfazem todas as equações
+em simultâneo:
+
+\begin{gather*}
+\vec{x}(t) =
+\begin{bmatrix}
+\phi_1(t) \\
+\phi_2(t) \\
+\vdots \\
+\phi_n(t)
+\end{bmatrix}
+\quad \text{ou seja} \quad
+\begin{dcases}
+x_1 = \phi_1(t) \\
+x_2 = \phi_2(t) \\
+\vdots \\
+x_n = \phi_n(t)
+\end{dcases}
+\end{gather*}
+
+Além do sistema, podem também ser fornecidas $n$ condições iniciais (uma para cada variável, todas no mesmo
+instante $t_0$), obtendo-se um PVI:
+
+\begin{gather*}
+\begin{dcases}
+\frac{d\vec{x}}{dt} = A(t)\vec{x} + \vec{g}(t) \\
+\vec{x}(t_0) = \vec{x}_0
+\end{dcases}
+\quad \text{com} \quad
+\vec{x}_0 =
+\begin{bmatrix}
+x_1^0 \\
+x_2^0 \\
+\vdots \\
+x_n^0
+\end{bmatrix}
+\quad \text{ou seja} \quad
+x_1(t_0) = x_1^0, \ \ldots, \ x_n(t_0) = x_n^0
+\end{gather*}
+
+\paragraph{Teorema de Existência e Unicidade}
+
+Se as funções $a_{ij}(t)$ e $g_i(t)$ são contínuas num intervalo aberto $I$ que contém $t_0$, então o PVI
+tem uma \textbf{única} solução, definida em todo o intervalo $I$.
+
+\begin{itemize}
+    \item Em particular, se $A$ é constante e $\vec{g}(t)$ é contínua em $\mathbb{R}$, a solução está
+    definida em todo o $\mathbb{R}$.
+\end{itemize}
+
+\paragraph{Relação com as EDO de ordem $n$}
+
+Uma EDO linear de ordem $n$ pode sempre ser escrita como um sistema de $n$ EDO de primeira ordem.
+Por exemplo, em $y'' + p(t)y' + q(t)y = g(t)$, fazendo $x_1 = y$ e $x_2 = y'$, obtém-se
+
+\begin{gather*}
+\begin{dcases}
+x_1' = x_2 \\
+x_2' = -q(t)x_1 - p(t)x_2 + g(t)
+\end{dcases}
+\Leftrightarrow
+\begin{bmatrix}
+x_1' \\
+x_2'
+\end{bmatrix}
+=
+\begin{bmatrix}
+0 & 1 \\
+-q(t) & -p(t)
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\
+x_2
+\end{bmatrix}
++
+\begin{bmatrix}
+0 \\
+g(t)
+\end{bmatrix}
+\end{gather*}
+
+\bigskip
+
+\subsection{Sistemas de Equações Diferenciais Ordinárias de 1ª Ordem Lineares Homogéneas}
+\label{subsec: sistemas-edo-ordem1-lineares-homogeneos}
+
+\begin{gather*}
+\boxed{\frac{d\vec{x}}{dt} = A\vec{x}, \quad A \text{ matriz } n \times n \text{ constante}}
+\end{gather*}
+
+Com $n = 1$, o sistema reduz-se a uma única equação, $x' = ax$, que é uma
+\nameref{subsec: edo-ordem1-linear-homogenea}, cuja solução é $x(t) = c e^{at}$, $c \in \mathbb{R}$.
+
+\smallskip
+
+Por isso (e tal como na \nameref{subsec: edo-ordem2-linear-homogenea-coef-constantes}), procuramos
+soluções da forma $\vec{x} = e^{rt}\vec{v}$, com $\vec{v} \neq \vec{0}$ constante, onde o expoente $r$ e
+o vetor $\vec{v}$ devem ser determinados:
+
+\begin{align*}
+& \frac{d\vec{x}}{dt} = A\vec{x} \\
+\Leftrightarrow \ & \frac{d}{dt}\left( e^{rt}\vec{v} \right) = A e^{rt}\vec{v} \\
+\Leftrightarrow \ & r e^{rt}\vec{v} = e^{rt} A\vec{v} \\
+\Leftrightarrow \ & r\vec{v} = A\vec{v} \quad \text{pois } e^{rt} \neq 0 \\
+\Leftrightarrow \ & A\vec{v} - rI\vec{v} = \vec{0} \\
+\Leftrightarrow \ & (A - rI)\vec{v} = \vec{0}
+\end{align*}
+
+Este sistema (algébrico) tem soluções $\vec{v} \neq \vec{0}$ se, e só se, a matriz $A - rI$ não é
+invertível, ou seja,
+
+\begin{gather*}
+\det(A - rI) = 0 \quad \text{(equação característica de } A \text{)}
+\end{gather*}
+
+Logo:
+
+\begin{itemize}
+    \item $r = \lambda$ é um \textbf{valor próprio} de $A$;
+    \item $\vec{v}$ é um \textbf{vetor próprio} de $A$ associado a $\lambda$.
+\end{itemize}
+
+Assim, para resolver o sistema é necessário determinar os valores e vetores próprios da matriz $A$
+(ver \nameref{subsec: valores-vetores-proprios}).
+
+\smallskip
+
+Sendo $A$ uma matriz $n \times n$, $\det(A - \lambda I)$ é um polinómio de grau $n$ em $\lambda$, logo,
+pelo Teorema Fundamental da Álgebra, tem $n$ raízes em $\mathbb{C}$, $\lambda_1, \ldots, \lambda_n$:
+
+\begin{itemize}
+    \item contam-se as raízes com as respetivas multiplicidades (há valores próprios que se podem repetir);
+    \item alguns valores próprios podem ser complexos;
+    \item um valor próprio repetido pode não ter vetores próprios linearmente independentes suficientes.
+\end{itemize}
+
+\paragraph{Princípio da Sobreposição e Solução Geral}
+
+Se $\vec{x}_1, \ldots, \vec{x}_k$ são soluções do sistema homogéneo, qualquer combinação linear
+$c_1 \vec{x}_1 + \cdots + c_k \vec{x}_k$ é também solução.
+
+Para um sistema de $n$ equações com $n$ variáveis precisamos de $n$ soluções linearmente independentes,
+$\vec{x}_1, \ldots, \vec{x}_n$, e então a \textbf{solução geral} é
+
+\begin{gather*}
+\boxed{\vec{x}(t) = c_1 \vec{x}_1(t) + c_2 \vec{x}_2(t) + \cdots + c_n \vec{x}_n(t),
+\quad c_1, \ldots, c_n \in \mathbb{R}}
+\end{gather*}
+
+Para verificar que $n$ soluções são linearmente independentes usa-se o Wronskiano, que é o determinante
+da matriz cujas colunas são as soluções:
+
+\begin{gather*}
+W(\vec{x}_1, \ldots, \vec{x}_n)(t) =
+\det
+\begin{bmatrix}
+\vec{x}_1(t) & \vec{x}_2(t) & \cdots & \vec{x}_n(t)
+\end{bmatrix}
+\neq 0
+\end{gather*}
+
+\begin{itemize}
+    \item Tal como para as EDO de ordem $n$, o Wronskiano de $n$ soluções do sistema homogéneo ou é nulo em
+    todo o $I$, ou nunca se anula em $I$. Por isso, basta verificar que é não nulo num único ponto
+    (por exemplo, $t = 0$).
+\end{itemize}
+
+\paragraph{Métodos de resolução}
+
+Vamos usar dois métodos para resolver estes sistemas:
+
+\begin{itemize}
+    \item \textbf{\nameref{subsubsec: metodo-combinacao-linear}}
+    \begin{itemize}
+        \item Primeiro caso: valores próprios com multiplicidade 1
+        \item Segundo caso: valores próprios com multiplicidade maior que 1
+    \end{itemize}
+    \item \textbf{\nameref{subsubsec: metodo-exponencial-matriz}}
+    \begin{itemize}
+        \item Primeiro caso: $A$ é diagonalizável
+        \item Segundo caso: $A$ não é diagonalizável
+    \end{itemize}
+\end{itemize}
+
+Ambos os métodos precisam de determinar os valores e vetores próprios de $A$.
+
+\subsubsection{Método da Combinação Linear}
+\label{subsubsec: metodo-combinacao-linear}
+
+\paragraph{Primeiro caso: valores próprios com multiplicidade 1}
+
+\begin{enumerate}
+    \item Calcular os valores próprios $\lambda_1, \ldots, \lambda_n$, resolvendo a equação polinomial de
+    grau $n$: $\det(A - \lambda I) = 0$.
+
+    \item Calcular um vetor próprio $\vec{v}_i$ associado a cada valor próprio $\lambda_i$, resolvendo
+    $(A - \lambda_i I)\vec{v}_i = \vec{0}$.
+    \begin{itemize}
+        \item Aplicar o \nameref{par: eliminacao-gauss} à matriz aumentada
+        $[A - \lambda_i I \mid \vec{0}]$. Como $\det(A - \lambda_i I) = 0$, o sistema é
+        sempre possível e indeterminado (há sempre pelo menos uma variável livre).
+        \item Cada par $(\lambda_i, \vec{v}_i)$ dá uma solução do sistema, $\vec{x}_i = e^{\lambda_i t}\vec{v}_i$.
+        \item Vetores próprios associados a valores próprios distintos são linearmente independentes, logo,
+        neste caso, obtêm-se $n$ soluções linearmente independentes.
+    \end{itemize}
+
+    \item Determinar a solução geral, que é dada pela combinação linear de todas as soluções:
+    \begin{gather*}
+    \boxed{\vec{x}(t) = c_1 e^{\lambda_1 t}\vec{v}_1 + c_2 e^{\lambda_2 t}\vec{v}_2 + \cdots
+    + c_n e^{\lambda_n t}\vec{v}_n, \quad c_1, \ldots, c_n \in \mathbb{R}}
+    \end{gather*}
+
+    \item Se for um PVI, $\vec{x}(t_0) = \vec{x}_0$, substituir $t = t_0$ na solução geral e resolver o sistema
+    (algébrico) resultante para obter $c_1, \ldots, c_n$.
+\end{enumerate}
+
+\smallskip
+
+\textbf{Valores próprios complexos.}
+Como $A$ é real, os valores próprios complexos ocorrem em pares conjugados, $\lambda = \alpha \pm i \beta$,
+e os vetores próprios associados também são conjugados, $\vec{v}$ e $\overline{\vec{v}}$.
+Ficamos com 2 soluções complexas:
+
+\begin{gather*}
+\begin{dcases}
+\vec{x}_1 = e^{(\alpha + i \beta)t}\vec{v} \\
+\vec{x}_2 = e^{(\alpha - i \beta)t}\overline{\vec{v}}
+\end{dcases}
+\end{gather*}
+
+Escrevendo $\vec{v} = \vec{a} + i\vec{b}$, com $\vec{a}, \vec{b} \in \mathbb{R}^n$, e usando a fórmula de Euler,
+$e^{i \theta} = \cos(\theta) + i \sin(\theta)$:
+
+\begin{align*}
+e^{(\alpha + i \beta)t}\vec{v}
+&= e^{\alpha t} \left( \cos(\beta t) + i \sin(\beta t) \right) \left( \vec{a} + i\vec{b} \right) \\
+&= e^{\alpha t} \left( \cos(\beta t)\vec{a} - \sin(\beta t)\vec{b} \right)
++ i \, e^{\alpha t} \left( \sin(\beta t)\vec{a} + \cos(\beta t)\vec{b} \right)
+\end{align*}
+
+As partes real e imaginária são 2 soluções reais linearmente independentes, que substituem as 2 soluções
+complexas:
+
+\begin{gather*}
+\boxed{
+\begin{dcases}
+\vec{x}_1 = \operatorname{Re}\left[ e^{(\alpha + i \beta)t}\vec{v} \right]
+= e^{\alpha t} \left( \cos(\beta t)\vec{a} - \sin(\beta t)\vec{b} \right) \\
+\vec{x}_2 = \operatorname{Im}\left[ e^{(\alpha + i \beta)t}\vec{v} \right]
+= e^{\alpha t} \left( \sin(\beta t)\vec{a} + \cos(\beta t)\vec{b} \right)
+\end{dcases}
+}
+\end{gather*}
+
+\begin{itemize}
+    \item Nota: basta calcular o vetor próprio de um dos valores próprios do par (por exemplo,
+    $\alpha + i \beta$). O conjugado dá as mesmas soluções reais (a menos do sinal).
+\end{itemize}
+
+\paragraph{Exemplo}
+
+\begin{gather*}
+\frac{d\vec{x}}{dt} =
+\begin{bmatrix}
+1 & 1 \\
+4 & 1
+\end{bmatrix}
+\vec{x}
+\end{gather*}
+
+Valores próprios:
+
+\begin{align*}
+& \det(A - \lambda I) = 0 \\
+\Leftrightarrow \ &
+\begin{vmatrix}
+1 - \lambda & 1 \\
+4 & 1 - \lambda
+\end{vmatrix}
+= 0 \\
+\Leftrightarrow \ & (1 - \lambda)^2 - 4 = 0 \\
+\Leftrightarrow \ & 1 - \lambda = \pm 2 \\
+\Leftrightarrow \ & \lambda_1 = 3 \lor \lambda_2 = -1
+\end{align*}
+
+Vetores próprios, sendo $\vec{v} = (a, b)$:
+
+\begin{gather*}
+\lambda_1 = 3: \quad
+\left[ \begin{array}{cc|c}
+-2 & 1 & 0 \\
+4 & -2 & 0
+\end{array} \right]
+\xrightarrow{L_2 + 2L_1}
+\left[ \begin{array}{cc|c}
+-2 & 1 & 0 \\
+0 & 0 & 0
+\end{array} \right]
+\implies b = 2a
+\implies \vec{v}_1 =
+\begin{bmatrix}
+1 \\
+2
+\end{bmatrix}
+\\[1ex]
+\lambda_2 = -1: \quad
+\left[ \begin{array}{cc|c}
+2 & 1 & 0 \\
+4 & 2 & 0
+\end{array} \right]
+\xrightarrow{L_2 - 2L_1}
+\left[ \begin{array}{cc|c}
+2 & 1 & 0 \\
+0 & 0 & 0
+\end{array} \right]
+\implies b = -2a
+\implies \vec{v}_2 =
+\begin{bmatrix}
+1 \\
+-2
+\end{bmatrix}
+\end{gather*}
+
+A solução geral é
+
+\begin{gather*}
+\boxed{\vec{x}(t) =
+c_1 e^{3t}
+\begin{bmatrix}
+1 \\
+2
+\end{bmatrix}
++ c_2 e^{-t}
+\begin{bmatrix}
+1 \\
+-2
+\end{bmatrix},
+\quad c_1, c_2 \in \mathbb{R}}
+\end{gather*}
+
+ou seja, $x_1(t) = c_1 e^{3t} + c_2 e^{-t}$ e $x_2(t) = 2c_1 e^{3t} - 2c_2 e^{-t}$.
+
+\paragraph{Segundo caso: valores próprios com multiplicidade maior que 1}
+
+Cada valor próprio $\lambda$ tem duas multiplicidades:
+
+\begin{itemize}
+    \item \textbf{Algébrica}, $\text{m.alg}(\lambda)$: multiplicidade de $\lambda$ como raiz do
+    polinómio característico $\det(A - \lambda I)$.
+    \item \textbf{Geométrica}, $\text{m.geo}(\lambda)$: número de vetores próprios linearmente
+    independentes associados a $\lambda$, ou seja, o número de variáveis livres de
+    $(A - \lambda I)\vec{v} = \vec{0}$.
+\end{itemize}
+
+Alguns teoremas, propriedades e definições (sendo $\lambda_1, \ldots, \lambda_k$ os valores próprios
+\textbf{distintos} de $A$):
+
+\begin{itemize}
+    \item $\boxed{1 \leq \text{m.geo}(\lambda_i) \leq \text{m.alg}(\lambda_i)}$
+    para todo o valor próprio $\lambda_i$.
+    \item $\lambda_i \neq \lambda_j \implies \vec{v}_i, \vec{v}_j$ são linearmente independentes.
+    \item $\sum_{i=1}^{k} \text{m.alg}(\lambda_i) = n$.
+    \item $M = \sum_{i=1}^{k} \text{m.geo}(\lambda_i) \leq n$ é o número de vetores próprios
+    linearmente independentes que é possível encontrar e, portanto, o número de soluções linearmente
+    independentes da forma $e^{\lambda t}\vec{v}$.
+    \item $\boxed{\text{m.geo}(\lambda_i) = \text{m.alg}(\lambda_i), \ \forall i
+    \iff M = n}$: existe uma base de $\mathbb{R}^n$ (ou $\mathbb{C}^n$) formada só por vetores próprios.
+    \begin{itemize}
+        \item Neste caso a matriz $A$ é \textbf{diagonalizável}.
+        \item É a mesma coisa que dizer que existem $n$ vetores próprios linearmente independentes.
+        \item Resolve-se como no primeiro caso: cada valor próprio $\lambda$ dá $\text{m.geo}(\lambda)$
+        soluções $e^{\lambda t}\vec{v}_j$, uma por cada vetor próprio linearmente independente.
+    \end{itemize}
+    \item $\boxed{\exists \, \lambda_i : \text{m.geo}(\lambda_i) < \text{m.alg}(\lambda_i)
+    \implies M < n}$: faltam $n - M$ soluções e é preciso construir \textbf{vetores generalizados} para
+    compensar a diferença.
+\end{itemize}
+
+\smallskip
+
+\textbf{Construir vetores generalizados}, quando $\text{m.geo}(\lambda) < \text{m.alg}(\lambda)$:
+
+\begin{itemize}
+    \item $\text{m.alg}(\lambda) = 2 \land \text{m.geo}(\lambda) = 1 \implies$ precisamos de
+    mais 1 solução linearmente independente:
+    \begin{align*}
+    (A - \lambda I)\vec{v} &= \vec{0} & & \text{obtemos um vetor próprio } \vec{v}, &
+    \vec{x}_1 &= e^{\lambda t}\vec{v} \\
+    (A - \lambda I)\vec{w} &= \vec{v} & & \text{obtemos um vetor generalizado } \vec{w}, &
+    \vec{x}_2 &= e^{\lambda t}\vec{w} + t e^{\lambda t}\vec{v}
+    \end{align*}
+
+    \item $\text{m.alg}(\lambda) = 3 \land \text{m.geo}(\lambda) = 1 \implies$ precisamos de
+    mais 2 soluções linearmente independentes, construindo uma cadeia de 2 vetores generalizados:
+    \begin{align*}
+    (A - \lambda I)\vec{v} &= \vec{0} & & \text{vetor próprio } \vec{v}, &
+    \vec{x}_1 &= e^{\lambda t}\vec{v} \\
+    (A - \lambda I)\vec{w} &= \vec{v} & & \text{vetor generalizado } \vec{w}, &
+    \vec{x}_2 &= e^{\lambda t}\vec{w} + t e^{\lambda t}\vec{v} \\
+    (A - \lambda I)\vec{z} &= \vec{w} & & \text{vetor generalizado } \vec{z}, &
+    \vec{x}_3 &= e^{\lambda t}\vec{z} + t e^{\lambda t}\vec{w} + \frac{t^2}{2} e^{\lambda t}\vec{v}
+    \end{align*}
+
+    \item $\text{m.alg}(\lambda) = 3 \land \text{m.geo}(\lambda) = 2 \implies$ precisamos de
+    mais 1 solução linearmente independente:
+    \begin{align*}
+    (A - \lambda I)\vec{v} &= \vec{0} & & \text{vetores próprios } \vec{v}_1, \vec{v}_2, &
+    \vec{x}_1 &= e^{\lambda t}\vec{v}_1, \quad \vec{x}_2 = e^{\lambda t}\vec{v}_2 \\
+    (A - \lambda I)\vec{w} &= \vec{v} & & \text{vetor generalizado } \vec{w}, &
+    \vec{x}_3 &= e^{\lambda t}\vec{w} + t e^{\lambda t}\vec{v}
+    \end{align*}
+    \begin{itemize}
+        \item Aqui, $\vec{v} = k_1 \vec{v}_1 + k_2 \vec{v}_2$ é um vetor próprio que tem de ser escolhido de
+        forma a que o sistema $(A - \lambda I)\vec{w} = \vec{v}$ seja possível (nem todos os vetores
+        próprios servem).
+    \end{itemize}
+\end{itemize}
+
+Em geral, uma cadeia $\vec{v}, \vec{w}_1, \ldots, \vec{w}_{m-1}$, com $(A - \lambda I)\vec{w}_1 = \vec{v}$ e
+$(A - \lambda I)\vec{w}_j = \vec{w}_{j-1}$, dá as soluções
+
+\begin{gather*}
+\vec{x}_{j+1} = e^{\lambda t} \left( \vec{w}_j + t\vec{w}_{j-1} + \frac{t^2}{2!}\vec{w}_{j-2} + \cdots
++ \frac{t^j}{j!}\vec{v} \right), \quad j = 1, \ldots, m - 1
+\end{gather*}
+
+\begin{itemize}
+    \item Os sistemas $(A - \lambda I)\vec{w} = \vec{v}$ são possíveis e indeterminados. Basta escolher uma
+    solução qualquer (por exemplo, a que se obtém fixando as variáveis livres a $0$).
+    \item Nota: o nome vem de os vetores generalizados satisfazerem $(A - \lambda I)^k \vec{w} = \vec{0}$
+    para algum $k > 1$. Por exemplo, $(A - \lambda I)^2 \vec{w} = (A - \lambda I)\vec{v} = \vec{0}$.
+\end{itemize}
+
+\paragraph{Exemplo}
+
+\begin{gather*}
+\frac{d\vec{x}}{dt} =
+\begin{bmatrix}
+3 & 1 \\
+-1 & 1
+\end{bmatrix}
+\vec{x}
+\end{gather*}
+
+Valores próprios:
+
+\begin{gather*}
+\begin{vmatrix}
+3 - \lambda & 1 \\
+-1 & 1 - \lambda
+\end{vmatrix}
+= (3 - \lambda)(1 - \lambda) + 1 = \lambda^2 - 4\lambda + 4 = (\lambda - 2)^2 = 0
+\Leftrightarrow \lambda = 2,
+\quad \text{m.alg}(2) = 2
+\end{gather*}
+
+Vetor próprio e vetor generalizado, sendo $(a, b)$ as incógnitas:
+
+\begin{gather*}
+(A - 2I)\vec{v} = \vec{0}: \quad
+\left[ \begin{array}{cc|c}
+1 & 1 & 0 \\
+-1 & -1 & 0
+\end{array} \right]
+\xrightarrow{L_2 + L_1}
+\left[ \begin{array}{cc|c}
+1 & 1 & 0 \\
+0 & 0 & 0
+\end{array} \right]
+\implies b = -a
+\implies \vec{v} =
+\begin{bmatrix}
+1 \\
+-1
+\end{bmatrix}
+\\[1ex]
+(A - 2I)\vec{w} = \vec{v}: \quad
+\left[ \begin{array}{cc|c}
+1 & 1 & 1 \\
+-1 & -1 & -1
+\end{array} \right]
+\xrightarrow{L_2 + L_1}
+\left[ \begin{array}{cc|c}
+1 & 1 & 1 \\
+0 & 0 & 0
+\end{array} \right]
+\implies a = 1 - b
+\stackrel{b = 0}{\implies} \vec{w} =
+\begin{bmatrix}
+1 \\
+0
+\end{bmatrix}
+\end{gather*}
+
+Só há uma variável livre em $(A - 2I)\vec{v} = \vec{0}$, logo $\text{m.geo}(2) = 1 < 2$.
+A solução geral é
+
+\begin{gather*}
+\boxed{\vec{x}(t) =
+c_1 e^{2t}
+\begin{bmatrix}
+1 \\
+-1
+\end{bmatrix}
++ c_2 \left( e^{2t}
+\begin{bmatrix}
+1 \\
+0
+\end{bmatrix}
++ t e^{2t}
+\begin{bmatrix}
+1 \\
+-1
+\end{bmatrix}
+\right),
+\quad c_1, c_2 \in \mathbb{R}}
+\end{gather*}
+
+\subsubsection{Método da Exponencial de Matriz}
+\label{subsubsec: metodo-exponencial-matriz}
+
+Generalizando o caso $n = 1$ ($x' = ax \Leftrightarrow x = e^{at}c$), a solução geral do sistema
+homogéneo é
+
+\begin{gather*}
+\boxed{\frac{d\vec{x}}{dt} = A\vec{x} \Leftrightarrow \vec{x}(t) = e^{At}\vec{c}, \quad \vec{c} \in \mathbb{R}^n}
+\end{gather*}
+
+onde $e^{At}$ é a exponencial da matriz $At$ (ver \nameref{subsec: exponencial-matriz}).
+
+\begin{itemize}
+    \item Isto resulta de $\frac{d}{dt} e^{At} = A e^{At}$.
+    \item As colunas da matriz $e^{At}$ são $n$ soluções linearmente independentes do sistema.
+    \item PVI: $\vec{x}(t_0) = \vec{x}_0 \implies e^{At_0}\vec{c} = \vec{x}_0 \Leftrightarrow
+    \vec{c} = e^{-At_0}\vec{x}_0$, logo
+    \begin{gather*}
+    \boxed{\vec{x}(t) = e^{A(t - t_0)}\vec{x}_0}
+    \end{gather*}
+    Em particular, se $t_0 = 0$, então $\vec{x}(t) = e^{At}\vec{x}_0$.
+\end{itemize}
+
+O cálculo de $e^{At}$ depende de $A$ ser ou não diagonalizável.
+
+\paragraph{Primeiro caso: $A$ é diagonalizável}
+($\text{m.geo}(\lambda_i) = \text{m.alg}(\lambda_i)$ para todo o $\lambda_i$)
+
+\begin{enumerate}
+    \item Calcular os valores próprios, resolvendo a equação polinomial de grau $n$: $\det(A - \lambda I) = 0$.
+    \item Calcular os vetores próprios associados a cada valor próprio: $(A - \lambda_i I)\vec{v}_i = \vec{0}$.
+    \item Calcular $e^{At}$:
+    $\boxed{A = S \Lambda S^{-1} \implies e^{At} = S e^{\Lambda t} S^{-1}}$
+    \begin{itemize}
+        \item Montar as matrizes $S$ (as colunas são os vetores próprios), $\Lambda$ (matriz diagonal com
+        os valores próprios, pela mesma ordem) e $e^{\Lambda t}$:
+        \begin{gather*}
+        S =
+        \begin{bmatrix}
+        \vec{v}_1 & \vec{v}_2 & \cdots & \vec{v}_n
+        \end{bmatrix},
+        \quad
+        \Lambda =
+        \begin{bmatrix}
+        \lambda_1 & 0 & \cdots & 0 \\
+        0 & \lambda_2 & \cdots & 0 \\
+        \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & \cdots & \lambda_n
+        \end{bmatrix},
+        \quad
+        e^{\Lambda t} =
+        \begin{bmatrix}
+        e^{\lambda_1 t} & 0 & \cdots & 0 \\
+        0 & e^{\lambda_2 t} & \cdots & 0 \\
+        \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & \cdots & e^{\lambda_n t}
+        \end{bmatrix}
+        \end{gather*}
+        \item Calcular a matriz inversa $S^{-1}$:
+        $\left[ \begin{array}{c|c} S & I \end{array} \right] \sim \cdots \sim
+        \left[ \begin{array}{c|c} I & S^{-1} \end{array} \right]$
+        (ver \nameref{par: matriz-inversa}).
+        \item Produto matricial: $(S e^{\Lambda t})S^{-1}$ ou $S (e^{\Lambda t} S^{-1})$.
+    \end{itemize}
+    \item Determinar a solução geral, $\vec{x} = e^{At}\vec{c}$, ou a solução do PVI,
+    $\vec{x} = e^{A(t - t_0)}\vec{x}_0$.
+\end{enumerate}
+
+\begin{itemize}
+    \item Nota: as colunas de $S e^{\Lambda t}$ são $e^{\lambda_1 t}\vec{v}_1, \ldots, e^{\lambda_n t}\vec{v}_n$,
+    ou seja, as soluções do \nameref{subsubsec: metodo-combinacao-linear}. A matriz $S^{-1}$ só faz falta
+    para obter exatamente $e^{At}$ (por exemplo, para resolver o PVI).
+    \item Nota: se houver valores próprios complexos, $S$ e $\Lambda$ são complexas, mas $e^{At}$ é real.
+    Em alternativa, $e^{At} = X(t) X(0)^{-1}$, onde $X(t)$ é a matriz cujas colunas são $n$ soluções reais
+    linearmente independentes (obtidas, por exemplo, pelo \nameref{subsubsec: metodo-combinacao-linear}).
+\end{itemize}
+
+\paragraph{Exemplo}
+
+Com a matriz $A = \begin{bmatrix} 1 & 1 \\ 4 & 1 \end{bmatrix}$ do primeiro exemplo do
+\nameref{subsubsec: metodo-combinacao-linear}, e com $\vec{x}(0) = (1, 0)$:
+
+\begin{gather*}
+S =
+\begin{bmatrix}
+1 & 1 \\
+2 & -2
+\end{bmatrix},
+\quad
+\Lambda =
+\begin{bmatrix}
+3 & 0 \\
+0 & -1
+\end{bmatrix},
+\quad
+e^{\Lambda t} =
+\begin{bmatrix}
+e^{3t} & 0 \\
+0 & e^{-t}
+\end{bmatrix},
+\quad
+S^{-1} = \frac{1}{-4}
+\begin{bmatrix}
+-2 & -1 \\
+-2 & 1
+\end{bmatrix}
+= \frac{1}{4}
+\begin{bmatrix}
+2 & 1 \\
+2 & -1
+\end{bmatrix}
+\end{gather*}
+
+\begin{gather*}
+e^{At} = S e^{\Lambda t} S^{-1} =
+\begin{bmatrix}
+e^{3t} & e^{-t} \\
+2e^{3t} & -2e^{-t}
+\end{bmatrix}
+\frac{1}{4}
+\begin{bmatrix}
+2 & 1 \\
+2 & -1
+\end{bmatrix}
+= \frac{1}{4}
+\begin{bmatrix}
+2e^{3t} + 2e^{-t} & e^{3t} - e^{-t} \\
+4e^{3t} - 4e^{-t} & 2e^{3t} + 2e^{-t}
+\end{bmatrix}
+\end{gather*}
+
+\begin{gather*}
+\boxed{\vec{x}(t) = e^{At}\vec{x}_0 = e^{At}
+\begin{bmatrix}
+1 \\
+0
+\end{bmatrix}
+=
+\begin{bmatrix}
+\frac{1}{2}\left( e^{3t} + e^{-t} \right) \\
+e^{3t} - e^{-t}
+\end{bmatrix}}
+\end{gather*}
+
+\paragraph{Segundo caso: $A$ não é diagonalizável}
+($\exists \, \lambda_i : \text{m.geo}(\lambda_i) < \text{m.alg}(\lambda_i)$)
+
+\begin{enumerate}
+    \item Calcular os valores próprios, resolvendo a equação polinomial de grau $n$: $\det(A - \lambda I) = 0$.
+    \item Calcular os vetores próprios associados a cada valor próprio: $(A - \lambda_i I)\vec{v}_i = \vec{0}$.
+    \begin{itemize}
+        \item Para os valores próprios com $\text{m.geo}(\lambda_i) < \text{m.alg}(\lambda_i)$
+        é preciso calcular também os vetores generalizados, como no segundo caso do
+        \nameref{subsubsec: metodo-combinacao-linear}.
+    \end{itemize}
+    \item Calcular $e^{At}$:
+    $\boxed{A = S J S^{-1} \implies e^{At} = S e^{J t} S^{-1}}$
+    \begin{itemize}
+        \item $J$ é a forma canónica de Jordan de $A$ (ver \nameref{subsec: forma-canonica-jordan}).
+        \item Montar as matrizes $S$, $J$ e $e^{J t}$. As colunas de $S$ são os vetores próprios e
+        generalizados, pela ordem dos blocos de Jordan: cada vetor próprio é seguido dos seus vetores
+        generalizados ($\ldots, \vec{v}, \vec{w}, \vec{z}, \ldots$).
+        \item Calcular a matriz inversa $S^{-1}$:
+        $\left[ \begin{array}{c|c} S & I \end{array} \right] \sim \cdots \sim
+        \left[ \begin{array}{c|c} I & S^{-1} \end{array} \right]$.
+        \item Produto matricial: $(S e^{J t})S^{-1}$ ou $S (e^{J t} S^{-1})$.
+    \end{itemize}
+    \item Determinar a solução geral, $\vec{x} = e^{At}\vec{c}$, ou a solução do PVI,
+    $\vec{x} = e^{A(t - t_0)}\vec{x}_0$.
+\end{enumerate}
+
+\paragraph{Exemplo}
+
+Com a matriz $A = \begin{bmatrix} 3 & 1 \\ -1 & 1 \end{bmatrix}$ do segundo exemplo do
+\nameref{subsubsec: metodo-combinacao-linear}, onde $\lambda = 2$, $\vec{v} = (1, -1)$ e $\vec{w} = (1, 0)$:
+
+\begin{gather*}
+S =
+\begin{bmatrix}
+1 & 1 \\
+-1 & 0
+\end{bmatrix},
+\quad
+J =
+\begin{bmatrix}
+2 & 1 \\
+0 & 2
+\end{bmatrix},
+\quad
+e^{Jt} =
+\begin{bmatrix}
+e^{2t} & t e^{2t} \\
+0 & e^{2t}
+\end{bmatrix},
+\quad
+S^{-1} =
+\begin{bmatrix}
+0 & -1 \\
+1 & 1
+\end{bmatrix}
+\end{gather*}
+
+\begin{gather*}
+\boxed{e^{At} = S e^{Jt} S^{-1} =
+\begin{bmatrix}
+e^{2t} & (1 + t)e^{2t} \\
+-e^{2t} & -t e^{2t}
+\end{bmatrix}
+\begin{bmatrix}
+0 & -1 \\
+1 & 1
+\end{bmatrix}
+=
+e^{2t}
+\begin{bmatrix}
+1 + t & t \\
+-t & 1 - t
+\end{bmatrix}}
+\end{gather*}
+
+\bigskip
+
+\subsection{Sistemas de Equações Diferenciais Ordinárias de 1ª Ordem Lineares Não Homogéneas}
+\label{subsec: sistemas-edo-ordem1-lineares-nao-homogeneos}
+
+\begin{gather*}
+\begin{dcases}
+\frac{d\vec{x}}{dt} = A\vec{x} + \vec{g}(t) \\
+\vec{x}(t_0) = \vec{x}_0
+\end{dcases}
+\end{gather*}
+
+A solução deste PVI é dada pela \textbf{fórmula da variação das constantes}:
+
+\begin{gather*}
+\boxed{\vec{x}(t) = e^{A(t - t_0)}\vec{x}_0 + \int_{t_0}^{t} e^{A(t - s)}\vec{g}(s) \, ds}
+\end{gather*}
+
+\begin{itemize}
+    \item Como podemos ver, vamos usar exponenciais de matrizes $e^{At}$ para resolver sistemas não homogéneos.
+    \item Tal como nas EDO, a solução é a soma de duas parcelas:
+    \begin{itemize}
+        \item $e^{A(t - t_0)}\vec{x}_0$ é a solução do sistema homogéneo associado,
+        $\frac{d\vec{x}}{dt} = A\vec{x}$, com $\vec{x}(t_0) = \vec{x}_0$;
+        \item $\int_{t_0}^{t} e^{A(t - s)}\vec{g}(s) \, ds$ é uma solução particular do sistema não homogéneo
+        (que se anula em $t_0$).
+    \end{itemize}
+    \item O integral de um vetor calcula-se componente a componente.
+    \item Como $e^{A(t - s)} = e^{At}e^{-As}$ e $e^{At}$ não depende de $s$, pode-se tirar $e^{At}$ para fora
+    do integral:
+    \begin{gather*}
+    \int_{t_0}^{t} e^{A(t - s)}\vec{g}(s) \, ds = e^{At} \int_{t_0}^{t} e^{-As}\vec{g}(s) \, ds
+    \end{gather*}
+    \item Sem condição inicial, a solução geral é
+    $\vec{x}(t) = e^{At}\vec{c} + \int_{0}^{t} e^{A(t - s)}\vec{g}(s) \, ds$, $\vec{c} \in \mathbb{R}^n$.
+\end{itemize}
+
+\paragraph{Resolver o PVI}
+
+\begin{enumerate}
+    \item Calcular os valores próprios: $\det(A - \lambda I) = 0$.
+    \item Calcular os vetores próprios associados a cada valor próprio, $(A - \lambda_i I)\vec{v}_i = \vec{0}$,
+    e, se necessário, os vetores generalizados.
+    \item Calcular $e^{At}$:
+    $\boxed{A = S J S^{-1} \implies e^{At} = S e^{J t} S^{-1}}$,
+    como no \nameref{subsubsec: metodo-exponencial-matriz} (se $A$ for diagonalizável, $J = \Lambda$).
+    \begin{itemize}
+        \item Montar as matrizes $S$, $J$ e $e^{J t}$.
+        \item Calcular a matriz inversa $S^{-1}$:
+        $\left[ \begin{array}{c|c} S & I \end{array} \right] \sim \cdots \sim
+        \left[ \begin{array}{c|c} I & S^{-1} \end{array} \right]$.
+        \item Produto matricial: $(S e^{J t})S^{-1}$ ou $S (e^{J t} S^{-1})$.
+    \end{itemize}
+    \item Obter $e^{A(t - t_0)}$ e $e^{A(t - s)}$, substituindo $t$ por $t - t_0$ e por $t - s$ em $e^{At}$.
+    \item Calcular o produto $e^{A(t - s)}\vec{g}(s)$ e o integral (componente a componente).
+    \item Somar as duas parcelas para obter $\vec{x}(t)$.
+\end{enumerate}
+
+\paragraph{Exemplo}
+
+\begin{gather*}
+\begin{dcases}
+\frac{d\vec{x}}{dt} =
+\begin{bmatrix}
+0 & 1 \\
+0 & 0
+\end{bmatrix}
+\vec{x}
++
+\begin{bmatrix}
+0 \\
+1
+\end{bmatrix} \\
+\vec{x}(0) = \vec{0}
+\end{dcases}
+\end{gather*}
+
+A matriz $A$ já é um bloco de Jordan com $\lambda = 0$ (logo $S = I$ e $J = A$), e
+$e^{At} = \begin{bmatrix} 1 & t \\ 0 & 1 \end{bmatrix}$. Como $\vec{x}_0 = \vec{0}$, só resta a parcela do
+integral:
+
+\begin{gather*}
+\vec{x}(t) = \int_{0}^{t}
+\begin{bmatrix}
+1 & t - s \\
+0 & 1
+\end{bmatrix}
+\begin{bmatrix}
+0 \\
+1
+\end{bmatrix}
+ds
+= \int_{0}^{t}
+\begin{bmatrix}
+t - s \\
+1
+\end{bmatrix}
+ds
+=
+\begin{bmatrix}
+t^2 - \frac{t^2}{2} \\
+t
+\end{bmatrix}
+\end{gather*}
+
+pois $\int_{0}^{t} (t - s) \, ds = \left[ ts - \frac{s^2}{2} \right]_0^t = t^2 - \frac{t^2}{2}$ e
+$\int_{0}^{t} 1 \, ds = t$. Logo,
+
+\begin{gather*}
+\boxed{\vec{x}(t) =
+\begin{bmatrix}
+\frac{t^2}{2} \\
+t
+\end{bmatrix}}
+\end{gather*}
+
+\begin{itemize}
+    \item Nota: este sistema corresponde à EDO $y'' = 1$, com $y(0) = y'(0) = 0$ (fazendo $x_1 = y$,
+    $x_2 = y'$), cuja solução é, de facto, $y = \frac{t^2}{2}$.
+\end{itemize}
+
+\newpage
+
+% In some chapters, I will have an additional related chapter to provide some
+% additional information. Not sure how to name these chapters.
+\section{Secção Auxiliar: Relembrar Álgebra Linear}
+\label{sec: algebra-linear}
+
+Esta secção reúne os conceitos de Álgebra Linear necessários para resolver
+\nameref{sec: sistemas-edo-ordem1-lineares}.
+
+\subsection{Sistemas de Equações Lineares}
+
+\paragraph{Equação linear}
+
+\begin{gather*}
+a_1 x_1 + a_2 x_2 + \cdots + a_n x_n = b
+\end{gather*}
+
+\begin{itemize}
+    \item $x_1, \ldots, x_n$ são as incógnitas, $a_1, \ldots, a_n \in \mathbb{R}$ os coeficientes e
+    $b \in \mathbb{R}$ o termo independente.
+\end{itemize}
+
+\paragraph{Solução de uma equação linear}
+
+\begin{gather*}
+S = \left\{ (x_1, \ldots, x_n) \in \mathbb{R}^n : a_1 x_1 + \cdots + a_n x_n = b \right\}
+\end{gather*}
+
+\paragraph{Sistema de equações lineares}
+
+Conjunto de $m$ equações lineares nas mesmas $n$ incógnitas:
+
+\begin{gather*}
+\begin{dcases}
+a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n = b_1 \\
+a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n = b_2 \\
+\vdots \\
+a_{m1}x_1 + a_{m2}x_2 + \cdots + a_{mn}x_n = b_m
+\end{dcases}
+\end{gather*}
+
+\paragraph{Conjunto solução de um sistema de equações lineares}
+
+É o conjunto de todas as soluções possíveis, ou seja, as soluções comuns a todas as equações.
+Um sistema tem exatamente uma solução, nenhuma solução ou infinitas soluções:
+
+\begin{itemize}
+    \item Sistema possível e determinado (SPD): exatamente uma solução.
+    \item Sistema possível e indeterminado (SPI): infinitas soluções.
+    \item Sistema impossível (SI): nenhuma solução.
+\end{itemize}
+
+\paragraph{Forma matricial}
+
+A informação do sistema pode ser representada por matrizes. Sendo $A$ a matriz dos coeficientes ($m \times n$),
+$\vec{x}$ o vetor das incógnitas e $\vec{b}$ o vetor dos termos independentes:
+
+\begin{gather*}
+A =
+\begin{bmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{bmatrix},
+\quad
+\vec{x} =
+\begin{bmatrix}
+x_1 \\
+\vdots \\
+x_n
+\end{bmatrix},
+\quad
+\vec{b} =
+\begin{bmatrix}
+b_1 \\
+\vdots \\
+b_m
+\end{bmatrix}
+\implies
+\boxed{A\vec{x} = \vec{b}}
+\end{gather*}
+
+A \textbf{matriz aumentada} do sistema é $[A \mid \vec{b}]$.
+
+\paragraph{Método de Eliminação de Gauss}
+\label{par: eliminacao-gauss}
+
+O método de eliminação de Gauss consiste em escrever a matriz aumentada $[A \mid \vec{b}]$
+do sistema e aplicar-lhe sucessivamente operações elementares sobre as linhas, até obter uma
+\textbf{matriz em escada de linhas}. Depois, resolve-se o sistema de baixo para cima.
+
+\smallskip
+
+Operações elementares sobre as linhas de uma matriz (não alteram o conjunto solução):
+
+\begin{itemize}
+    \item Multiplicar uma linha, $k L_i$: multiplicar todas as entradas da linha por uma constante $k \neq 0$.
+    \item Trocar linhas, $L_i \leftrightarrow L_j$: trocar a ordem de duas linhas.
+    \item Somar linhas, $L_i + k L_j$: substituir a linha $L_i$ pela sua soma com um múltiplo de outra linha.
+\end{itemize}
+
+Numa matriz em escada de linhas, as linhas nulas estão em baixo e o primeiro elemento não nulo de cada linha
+(o \textbf{pivô}) está à direita do pivô da linha de cima:
+
+\begin{gather*}
+\begin{bmatrix}
+\ast & \cdot & \cdot & \cdot \\
+0 & \ast & \cdot & \cdot \\
+0 & 0 & 0 & \ast \\
+0 & 0 & 0 & 0
+\end{bmatrix}
+\quad \text{com os pivôs } \ast \neq 0
+\end{gather*}
+
+\begin{itemize}
+    \item O número de pivôs é a \textbf{característica} da matriz, $\operatorname{car}(A)$.
+    \item As incógnitas que não correspondem a colunas com pivô são \textbf{variáveis livres}
+    (há $n - \operatorname{car}(A)$).
+    \item Classificação do sistema:
+    \begin{itemize}
+        \item $\operatorname{car}(A) < \operatorname{car}([A \mid \vec{b}]) \implies$ SI;
+        \item $\operatorname{car}(A) = \operatorname{car}([A \mid \vec{b}]) = n \implies$ SPD;
+        \item $\operatorname{car}(A) = \operatorname{car}([A \mid \vec{b}]) < n \implies$ SPI.
+    \end{itemize}
+\end{itemize}
+
+\bigskip
+
+\subsection{Vetores e Combinações Lineares}
+
+\paragraph{Combinação linear}
+
+Dados os vetores $\vec{v}_1, \ldots, \vec{v}_p \in \mathbb{R}^n$ e os escalares (pesos)
+$c_1, \ldots, c_p \in \mathbb{R}$, o vetor
+
+\begin{gather*}
+\vec{y} = c_1 \vec{v}_1 + c_2 \vec{v}_2 + \cdots + c_p \vec{v}_p
+\end{gather*}
+
+é uma combinação linear de $\vec{v}_1, \ldots, \vec{v}_p$.
+
+\paragraph{Equação vetorial}
+
+Queremos saber se o vetor $\vec{b}$ pode ser gerado como combinação linear dos vetores
+$\vec{v}_1, \ldots, \vec{v}_p \in \mathbb{R}^n$, ou seja, determinar os pesos $c_1, \ldots, c_p \in \mathbb{R}$
+tais que
+
+\begin{gather*}
+c_1 \vec{v}_1 + c_2 \vec{v}_2 + \cdots + c_p \vec{v}_p = \vec{b}
+\end{gather*}
+
+\paragraph{Solução da equação vetorial}
+
+O conjunto de todas as combinações lineares de $\vec{v}_1, \ldots, \vec{v}_p$ é o \textbf{conjunto gerado}
+por esses vetores, $\operatorname{span}\{\vec{v}_1, \ldots, \vec{v}_p\}$. A equação vetorial tem solução
+se, e só se, $\vec{b} \in \operatorname{span}\{\vec{v}_1, \ldots, \vec{v}_p\}$.
+
+\paragraph{Equação matricial}
+
+A equação vetorial é equivalente à equação matricial $A\vec{x} = \vec{b}$, onde as colunas de $A$ são os
+vetores $\vec{v}_1, \ldots, \vec{v}_p$ e $\vec{x} = (c_1, \ldots, c_p)$:
+
+\begin{gather*}
+c_1 \vec{v}_1 + \cdots + c_p \vec{v}_p = \vec{b}
+\Leftrightarrow
+\begin{bmatrix}
+\vec{v}_1 & \cdots & \vec{v}_p
+\end{bmatrix}
+\begin{bmatrix}
+c_1 \\
+\vdots \\
+c_p
+\end{bmatrix}
+= \vec{b}
+\end{gather*}
+
+Logo, resolve-se com o \nameref{par: eliminacao-gauss} aplicado a
+$[\vec{v}_1 \ \cdots \ \vec{v}_p \mid \vec{b}]$.
+
+\paragraph{Independência linear}
+
+Os vetores $\{\vec{v}_1, \ldots, \vec{v}_p\}$ são \textbf{linearmente independentes} se a equação vetorial
+
+\begin{gather*}
+c_1 \vec{v}_1 + c_2 \vec{v}_2 + \cdots + c_p \vec{v}_p = \vec{0}
+\end{gather*}
+
+tem apenas a solução trivial, $c_1 = \cdots = c_p = 0$. São \textbf{linearmente dependentes} se existe uma
+solução não trivial.
+
+\begin{itemize}
+    \item Intuição: os vetores são linearmente independentes se nenhum deles pode ser escrito como combinação
+    linear dos outros.
+    \item $n$ vetores de $\mathbb{R}^n$ são linearmente independentes se, e só se,
+    $\det \begin{bmatrix} \vec{v}_1 & \cdots & \vec{v}_n \end{bmatrix} \neq 0$.
+\end{itemize}
+
+\bigskip
+
+\subsection{Matrizes}
+
+\paragraph{Produto matricial}
+
+Sendo $A$ uma matriz $m \times p$ e $B$ uma matriz $p \times n$, $AB$ é uma matriz $m \times n$ com
+$(AB)_{ij} = \sum_{k=1}^{p} a_{ik} b_{kj}$ (linha $i$ de $A$ vezes coluna $j$ de $B$).
+
+\smallskip
+
+Propriedades do produto matricial (para todas as matrizes $A$, $B$, $C$ para as quais os produtos estão
+definidos):
+
+\begin{itemize}
+    \item $AB \neq BA$ (em geral)
+    \item $(AB)C = A(BC)$
+    \item $k(AB) = (kA)B = A(kB)$
+    \item $A(B + C) = AB + AC$ e $(A + B)C = AC + BC$
+    \item $AI = IA = A$
+\end{itemize}
+
+\paragraph{Matriz transposta}
+
+A transposta de $A$, $A^T$, obtém-se trocando as linhas pelas colunas: $(A^T)_{ij} = a_{ji}$.
+
+\begin{itemize}
+    \item $(A^T)^T = A$, $\ (A + B)^T = A^T + B^T$, $\ (AB)^T = B^T A^T$
+\end{itemize}
+
+\paragraph{Matriz inversa}
+\label{par: matriz-inversa}
+
+Uma matriz quadrada $A$ ($n \times n$) é \textbf{invertível} se existe uma matriz $A^{-1}$ tal que
+
+\begin{gather*}
+A A^{-1} = A^{-1} A = I
+\end{gather*}
+
+\begin{itemize}
+    \item $A$ é invertível $\iff \det(A) \neq 0 \iff \operatorname{car}(A) = n \iff A\vec{x} = \vec{0}$ só tem a
+    solução trivial.
+    \item $(AB)^{-1} = B^{-1}A^{-1}$
+\end{itemize}
+
+Para determinar a matriz inversa, um método é aplicar o \nameref{par: eliminacao-gauss} à matriz aumentada
+$[A \mid I]$, continuando até o lado esquerdo ser a identidade:
+
+\begin{gather*}
+\left[ \begin{array}{c|c} A & I \end{array} \right] \sim \cdots \sim
+\left[ \begin{array}{c|c} I & A^{-1} \end{array} \right]
+\end{gather*}
+
+Para matrizes $2 \times 2$:
+
+\begin{gather*}
+\boxed{
+\begin{bmatrix}
+a & b \\
+c & d
+\end{bmatrix}^{-1}
+= \frac{1}{ad - bc}
+\begin{bmatrix}
+d & -b \\
+-c & a
+\end{bmatrix}}
+\end{gather*}
+
+\paragraph{Matriz diagonal}
+
+Matriz quadrada em que todas as entradas fora da diagonal principal são zeros:
+
+\begin{gather*}
+\begin{bmatrix}
+d_1 & 0 & \cdots & 0 \\
+0 & d_2 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & d_n
+\end{bmatrix}
+= \operatorname{diag}(d_1, d_2, \ldots, d_n)
+\end{gather*}
+
+\begin{itemize}
+    \item A matriz identidade é a matriz diagonal $I = \operatorname{diag}(1, 1, \ldots, 1)$.
+\end{itemize}
+
+\paragraph{Matriz triangular}
+
+Matriz quadrada em que todas as entradas abaixo (\textbf{triangular superior}) ou acima
+(\textbf{triangular inferior}) da diagonal principal são zeros.
+
+\paragraph{Matriz simétrica}
+
+Matriz quadrada tal que $A = A^T$.
+
+\paragraph{Matriz de blocos}
+
+Uma matriz de blocos (ou matriz particionada) é uma matriz dividida em blocos (submatrizes).
+
+\smallskip
+
+Uma \textbf{matriz diagonal de blocos} é uma matriz de blocos quadrada em que os blocos da diagonal principal
+são matrizes quadradas e os restantes blocos são nulos:
+
+\begin{gather*}
+M =
+\begin{bmatrix}
+M_1 & 0 & \cdots & 0 \\
+0 & M_2 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & M_k
+\end{bmatrix}
+\end{gather*}
+
+\bigskip
+
+\subsection{Determinantes}
+
+Seja $A$ uma matriz quadrada:
+
+\begin{gather*}
+\det(A)
+=
+\det
+\begin{bmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{n1} & a_{n2} & \cdots & a_{nn}
+\end{bmatrix}
+=
+\begin{vmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{n1} & a_{n2} & \cdots & a_{nn}
+\end{vmatrix}
+\end{gather*}
+
+\paragraph{$2 \times 2$}
+
+\begin{gather*}
+\begin{vmatrix}
+a & b \\
+c & d
+\end{vmatrix}
+= ad - bc
+\end{gather*}
+
+\paragraph{$3 \times 3$}
+
+\begin{gather*}
+\begin{vmatrix}
+a & b & c \\
+d & e & f \\
+g & h & i
+\end{vmatrix}
+= a(ei - fh) + b(fg - di) + c(dh - eg)
+= aei + bfg + cdh - ceg - bdi - afh
+\end{gather*}
+
+\paragraph{$n \times n$ (Teorema de Laplace)}
+
+\begin{gather*}
+\det(A)
+= \sum_{j=1}^{n} a_{kj} C_{kj} \quad \text{(fixando a linha } k \text{)}
+= \sum_{i=1}^{n} a_{ik} C_{ik} \quad \text{(fixando a coluna } k \text{)},
+\qquad k \in \{1, \ldots, n\}
+\\
+C_{ij} = (-1)^{i+j} \det(A_{ij})
+\end{gather*}
+
+\begin{itemize}
+    \item $C_{ij}$ é o \textbf{complemento algébrico} (cofator) de $a_{ij}$ e $A_{ij}$ é a matriz que se obtém
+    de $A$ retirando a linha $i$ e a coluna $j$.
+    \item Convém escolher a linha ou coluna com mais zeros.
+\end{itemize}
+
+\paragraph{Propriedades}
+
+\begin{itemize}
+    \item $\det(A^T) = \det(A)$
+    \item $\det(AB) = \det(A)\det(B)$ e $\det(A^{-1}) = \frac{1}{\det(A)}$
+    \item O determinante de uma matriz triangular (ou diagonal) é o produto das entradas da diagonal principal.
+    \item O determinante de uma matriz diagonal de blocos é o produto dos determinantes dos blocos.
+    \item Trocar duas linhas troca o sinal do determinante, $k L_i$ multiplica-o por $k$ e $L_i + k L_j$ não
+    o altera.
+\end{itemize}
+
+\bigskip
+
+\subsection{Espaços Vetoriais}
+
+\paragraph{Espaço vetorial}
+
+Um conjunto $V$, com uma soma de vetores e uma multiplicação por escalares, tal que
+$\vec{u} + \vec{v} \in V$ e $k\vec{v} \in V$ para quaisquer $\vec{u}, \vec{v} \in V$ e $k$ escalar,
+e que verifica as propriedades usuais destas operações (comutatividade, associatividade, existência do vetor
+nulo $\vec{0}$, etc.). Por exemplo, $\mathbb{R}^n$ e $\mathbb{C}^n$.
+
+\paragraph{Subespaço}
+
+Um subconjunto $H \subseteq V$ que também é um espaço vetorial, ou seja:
+
+\begin{itemize}
+    \item $\vec{0} \in H$;
+    \item $\vec{u}, \vec{v} \in H \implies \vec{u} + \vec{v} \in H$;
+    \item $\vec{v} \in H \implies k\vec{v} \in H$, para qualquer escalar $k$.
+\end{itemize}
+
+Por exemplo, $\operatorname{span}\{\vec{v}_1, \ldots, \vec{v}_p\}$ e o \textbf{núcleo} de uma matriz,
+$\operatorname{Nuc}(A) = \{ \vec{x} : A\vec{x} = \vec{0} \}$, são subespaços.
+
+\paragraph{Base}
+
+Uma base de um subespaço $H$ de um espaço vetorial $V$ é um conjunto $B$ de vetores linearmente independentes
+que gera $H$, ou seja, $\operatorname{span}(B) = H$.
+
+\begin{itemize}
+    \item Todo o vetor de $H$ escreve-se de forma única como combinação linear dos vetores de $B$.
+\end{itemize}
+
+\paragraph{Dimensão}
+
+Número de vetores de qualquer base de $H$, $\dim(H)$. Por exemplo, $\dim(\mathbb{R}^n) = n$.
+
+\begin{itemize}
+    \item $\dim(\operatorname{Nuc}(A)) = n - \operatorname{car}(A)$ = número de variáveis livres de
+    $A\vec{x} = \vec{0}$.
+\end{itemize}
+
+\bigskip
+
+\subsection{Valores e Vetores Próprios}
+\label{subsec: valores-vetores-proprios}
+
+Seja $A$ uma matriz quadrada $n \times n$.
+
+\begin{itemize}
+    \item Um \textbf{vetor próprio} de $A$ é um vetor $\vec{v} \neq \vec{0}$ tal que $A\vec{v} = \lambda\vec{v}$
+    para algum escalar $\lambda$.
+    \item Um escalar $\lambda$ é um \textbf{valor próprio} de $A$ se existe uma solução $\vec{v}$ não trivial de
+    $A\vec{v} = \lambda\vec{v}$, e $\vec{v}$ é um vetor próprio associado a $\lambda$.
+    \item O \textbf{espaço próprio} de $\lambda$ é
+    $E_\lambda = \operatorname{Nuc}(A - \lambda I) = \{ \vec{v} : (A - \lambda I)\vec{v} = \vec{0} \}$
+    (os vetores próprios associados a $\lambda$, mais o vetor nulo).
+\end{itemize}
+
+\paragraph{Determinar valores próprios}
+
+\begin{gather*}
+A\vec{v} = \lambda\vec{v} \text{ com } \vec{v} \neq \vec{0}
+\iff (A - \lambda I)\vec{v} = \vec{0} \text{ tem soluções não triviais}
+\iff \boxed{\det(A - \lambda I) = 0}
+\end{gather*}
+
+\begin{itemize}
+    \item $p(\lambda) = \det(A - \lambda I)$ é o \textbf{polinómio característico} de $A$ (de grau $n$) e os
+    valores próprios são as suas raízes.
+    \item A soma dos valores próprios é o traço de $A$, $\operatorname{tr}(A) = a_{11} + \cdots + a_{nn}$, e o
+    seu produto é $\det(A)$ (contando com as multiplicidades).
+    \item Para matrizes $2 \times 2$: $p(\lambda) = \lambda^2 - \operatorname{tr}(A)\lambda + \det(A)$.
+\end{itemize}
+
+\paragraph{Determinar vetores próprios}
+
+Para cada valor próprio $\lambda$, resolver $(A - \lambda I)\vec{v} = \vec{0}$ com o
+\nameref{par: eliminacao-gauss}, aplicado a $[A - \lambda I \mid \vec{0}]$. Como
+$\det(A - \lambda I) = 0$, o sistema é sempre possível e indeterminado, e as variáveis livres dão uma base
+de $E_\lambda$.
+
+\paragraph{Multiplicidades}
+
+\begin{itemize}
+    \item $\text{m.alg}(\lambda)$: multiplicidade de $\lambda$ como raiz de $p(\lambda)$.
+    \item $\text{m.geo}(\lambda) = \dim(E_\lambda) = n - \operatorname{car}(A - \lambda I)$: número de
+    vetores próprios linearmente independentes associados a $\lambda$.
+    \item $1 \leq \text{m.geo}(\lambda) \leq \text{m.alg}(\lambda)$
+\end{itemize}
+
+\paragraph{Teorema}
+
+Vetores próprios associados a valores próprios distintos são linearmente independentes.
+
+\paragraph{Teorema}
+
+Os valores próprios de uma matriz triangular são as entradas da sua diagonal principal, e o determinante é o
+produto dessas mesmas entradas.
+
+\begin{gather*}
+A =
+\begin{bmatrix}
+a_{11} & a_{12} & a_{13} \\
+0 & a_{22} & a_{23} \\
+0 & 0 & a_{33}
+\end{bmatrix}
+\implies
+\text{valores próprios: } a_{11}, a_{22}, a_{33}
+\quad \text{e} \quad
+\det(A) = a_{11} a_{22} a_{33}
+\end{gather*}
+
+Em particular, os valores próprios de uma matriz diagonal são as entradas da diagonal:
+
+\begin{gather*}
+\operatorname{diag}(\lambda_1, \lambda_2, \ldots, \lambda_n) =
+\begin{bmatrix}
+\lambda_1 & 0 & \cdots & 0 \\
+0 & \lambda_2 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & \lambda_n
+\end{bmatrix}
+\implies
+\text{valores próprios: } \lambda_1, \lambda_2, \ldots, \lambda_n
+\end{gather*}
+
+\paragraph{Teorema}
+
+Os valores próprios de uma matriz diagonal de blocos $M = \operatorname{diag}(M_1, \ldots, M_k)$ são os
+valores próprios de todos os blocos $M_1, \ldots, M_k$ (o polinómio característico de $M$ é o produto dos
+polinómios característicos dos blocos).
+
+\begin{itemize}
+    \item Os vetores próprios de $M$ obtêm-se dos vetores próprios de cada bloco, completando com zeros nas
+    posições dos outros blocos.
+\end{itemize}
+
+\bigskip
+
+\subsection{Semelhança e Diagonalização}
+
+\paragraph{Matrizes semelhantes}
+
+Sejam $A$ e $B$ matrizes quadradas $n \times n$. $A$ é \textbf{semelhante} a $B$ se existe uma matriz
+invertível $S$ tal que
+
+\begin{gather*}
+S^{-1} A S = B \Leftrightarrow A = S B S^{-1}
+\end{gather*}
+
+\paragraph{Teorema}
+
+$A$ e $B$ semelhantes $\implies$ têm o mesmo polinómio característico $\implies$ têm os mesmos valores
+próprios (com as mesmas multiplicidades).
+
+\begin{gather*}
+\det(B - \lambda I) = \det(S^{-1} A S - \lambda S^{-1} S) = \det\left( S^{-1} (A - \lambda I) S \right)
+= \det(A - \lambda I)
+\end{gather*}
+
+\paragraph{Matriz diagonalizável}
+
+$A$ é \textbf{diagonalizável} se é semelhante a uma matriz diagonal $\Lambda$:
+
+\begin{gather*}
+\boxed{A = S \Lambda S^{-1}},
+\quad
+S =
+\begin{bmatrix}
+\vec{v}_1 & \vec{v}_2 & \cdots & \vec{v}_n
+\end{bmatrix},
+\quad
+\Lambda = \operatorname{diag}(\lambda_1, \lambda_2, \ldots, \lambda_n)
+\end{gather*}
+
+onde as colunas de $S$ são vetores próprios linearmente independentes e $\Lambda$ tem os valores próprios
+correspondentes, pela mesma ordem.
+
+\begin{itemize}
+    \item $A$ é diagonalizável $\iff$ $A$ tem $n$ vetores próprios linearmente independentes $\iff$
+    $\text{m.geo}(\lambda) = \text{m.alg}(\lambda)$ para todo o valor próprio $\lambda$.
+    \item Se $A$ tem $n$ valores próprios distintos, então é diagonalizável.
+    \item Isto resulta de
+    $AS = \begin{bmatrix} A\vec{v}_1 & \cdots & A\vec{v}_n \end{bmatrix}
+    = \begin{bmatrix} \lambda_1 \vec{v}_1 & \cdots & \lambda_n \vec{v}_n \end{bmatrix} = S\Lambda$.
+\end{itemize}
+
+\bigskip
+
+\subsection{Forma Canónica de Jordan}
+\label{subsec: forma-canonica-jordan}
+
+\paragraph{Bloco de Jordan}
+
+Um bloco de Jordan $J_k(\lambda)$ é uma matriz quadrada $k \times k$, associada a um valor próprio $\lambda$,
+com $\lambda$ na diagonal principal, $1$ imediatamente acima da diagonal e zeros nas restantes entradas:
+
+\begin{gather*}
+J_1(\lambda) =
+\begin{bmatrix}
+\lambda
+\end{bmatrix},
+\quad
+J_2(\lambda) =
+\begin{bmatrix}
+\lambda & 1 \\
+0 & \lambda
+\end{bmatrix},
+\quad
+J_3(\lambda) =
+\begin{bmatrix}
+\lambda & 1 & 0 \\
+0 & \lambda & 1 \\
+0 & 0 & \lambda
+\end{bmatrix},
+\quad
+J_k(\lambda) =
+\begin{bmatrix}
+\lambda & 1 & 0 & \cdots & 0 \\
+0 & \lambda & 1 & \cdots & 0 \\
+0 & 0 & \lambda & \ddots & \vdots \\
+\vdots & \vdots & \ddots & \ddots & 1 \\
+0 & 0 & \cdots & 0 & \lambda
+\end{bmatrix}
+\end{gather*}
+
+\paragraph{Matriz de Jordan}
+
+Uma matriz de Jordan é uma matriz diagonal de blocos em que cada bloco é um bloco de Jordan
+(os valores próprios dos vários blocos não têm de ser distintos):
+
+\begin{gather*}
+J =
+\begin{bmatrix}
+J_{k_1}(\lambda_1) & 0 & \cdots & 0 \\
+0 & J_{k_2}(\lambda_2) & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & J_{k_m}(\lambda_m)
+\end{bmatrix}
+\end{gather*}
+
+\paragraph{Forma canónica de Jordan}
+
+Qualquer matriz quadrada $A$, diagonalizável ou não, é semelhante a uma matriz de Jordan $J$ (possivelmente
+complexa), chamada a forma canónica de Jordan de $A$:
+
+\begin{gather*}
+\boxed{A = S J S^{-1} \Leftrightarrow J = S^{-1} A S}
+\end{gather*}
+
+\begin{itemize}
+    \item $S$ é uma matriz de mudança de base cujas colunas são os vetores próprios e os vetores generalizados
+    de $A$.
+    \item $J$ contém na sua diagonal os blocos de Jordan de cada valor próprio de $A$, respeitando a ordem das
+    colunas correspondentes em $S$.
+    \item A cada bloco $J_k(\lambda)$ corresponde, em $S$, uma cadeia de $k$ colunas: um vetor próprio
+    $\vec{v}$ seguido dos vetores generalizados $\vec{w}_1, \ldots, \vec{w}_{k-1}$, com
+    $(A - \lambda I)\vec{w}_1 = \vec{v}$ e $(A - \lambda I)\vec{w}_j = \vec{w}_{j-1}$.
+\end{itemize}
+
+\smallskip
+
+$A$ diagonalizável $\iff$ $J$ é diagonal:
+
+\begin{itemize}
+    \item Todos os blocos de Jordan têm dimensão $1$, ou seja, são os valores próprios individuais.
+    Neste caso $J$ é denotada por $\Lambda$ e as colunas de $S$ são só vetores próprios.
+\end{itemize}
+
+$A$ não diagonalizável $\iff$ $J$ tem pelo menos um bloco de dimensão maior que $1$. Para cada valor
+próprio $\lambda$:
+
+\begin{enumerate}
+    \item O número de blocos de Jordan de $\lambda$ é igual a $\text{m.geo}(\lambda)$ (um bloco por
+    cada vetor próprio linearmente independente).
+    \item A soma das dimensões dos blocos de Jordan de $\lambda$ é igual a $\text{m.alg}(\lambda)$.
+    \item Se $\text{m.geo}(\lambda) = \text{m.alg}(\lambda)$, todos os blocos de $\lambda$ têm
+    dimensão $1$.
+\end{enumerate}
+
+\begin{itemize}
+    \item Nota: para $\text{m.alg}(\lambda) \leq 3$, estas regras determinam completamente os blocos
+    de $\lambda$. Por exemplo, com $\text{m.alg}(\lambda) = 3$: $\text{m.geo}(\lambda) = 1$
+    dá um bloco $J_3(\lambda)$; $\text{m.geo}(\lambda) = 2$ dá os blocos $J_2(\lambda)$ e
+    $J_1(\lambda)$; $\text{m.geo}(\lambda) = 3$ dá três blocos $J_1(\lambda)$.
+\end{itemize}
+
+\paragraph{Exemplo}
+
+\begin{gather*}
+J =
+\begin{bmatrix}
+\lambda_1 & 0 & 0 & 0 & 0 \\
+0 & \lambda_2 & 0 & 0 & 0 \\
+0 & 0 & \lambda_2 & 0 & 0 \\
+0 & 0 & 0 & \lambda_3 & 1 \\
+0 & 0 & 0 & 0 & \lambda_3
+\end{bmatrix}
+\end{gather*}
+
+\begin{itemize}
+    \item $\lambda_1$: $\text{m.alg}(\lambda_1) = 1$, $\text{m.geo}(\lambda_1) = 1$
+    $\implies$ um bloco $J_1(\lambda_1)$.
+    \item $\lambda_2$: $\text{m.alg}(\lambda_2) = 2$, $\text{m.geo}(\lambda_2) = 2$
+    $\implies$ dois blocos $J_1(\lambda_2)$.
+    \item $\lambda_3$: $\text{m.alg}(\lambda_3) = 2$, $\text{m.geo}(\lambda_3) = 1$
+    $\implies$ um bloco $J_2(\lambda_3)$ (é preciso um vetor generalizado).
+\end{itemize}
+
+\paragraph{Exemplo}
+
+Tendo $\text{m.alg}(\lambda) = 3$ e $\text{m.geo}(\lambda) = 2$:
+
+\begin{gather*}
+J =
+\begin{bmatrix}
+\lambda & 1 & 0 \\
+0 & \lambda & 0 \\
+0 & 0 & \lambda
+\end{bmatrix}
+=
+\begin{bmatrix}
+J_2(\lambda) & 0 \\
+0 & J_1(\lambda)
+\end{bmatrix},
+\quad
+S =
+\begin{bmatrix}
+\vec{v}_1 & \vec{w} & \vec{v}_2
+\end{bmatrix}
+\end{gather*}
+
+\begin{itemize}
+    \item O bloco $J_2(\lambda)$ corresponde ao vetor próprio $\vec{v}_1$ e ao vetor generalizado $\vec{w}$,
+    com $(A - \lambda I)\vec{w} = \vec{v}_1$.
+    \item O bloco $J_1(\lambda)$ corresponde ao outro vetor próprio linearmente independente, $\vec{v}_2$.
+\end{itemize}
+
+\bigskip
+
+\subsection{Exponencial de Matriz}
+\label{subsec: exponencial-matriz}
+
+Tal como $e^x = \sum_{k=0}^{\infty} \frac{x^k}{k!}$, a exponencial de uma matriz quadrada $M$ é definida por
+
+\begin{gather*}
+\boxed{e^{M} = \sum_{k=0}^{\infty} \frac{M^k}{k!} = I + M + \frac{M^2}{2!} + \frac{M^3}{3!} + \cdots}
+\quad \implies \quad
+e^{At} = I + At + \frac{A^2 t^2}{2!} + \frac{A^3 t^3}{3!} + \cdots
+\end{gather*}
+
+\paragraph{Propriedades}
+
+\begin{itemize}
+    \item $e^{0} = I$ (onde $0$ é a matriz nula), logo $e^{A \cdot 0} = I$.
+    \item $\frac{d}{dt} e^{At} = A e^{At}$
+    \item $e^{A(t + s)} = e^{At} e^{As}$ e $\left( e^{At} \right)^{-1} = e^{-At}$
+    \item Cuidado: em geral $e^{A + B} \neq e^{A} e^{B}$ (só é verdade se $AB = BA$).
+    \item $A = S B S^{-1} \implies e^{At} = S e^{Bt} S^{-1}$, pois $A^k = S B^k S^{-1}$.
+\end{itemize}
+
+\paragraph{Matriz diagonal}
+
+\begin{gather*}
+A =
+\begin{bmatrix}
+\lambda_1 & 0 & \cdots & 0 \\
+0 & \lambda_2 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & \lambda_n
+\end{bmatrix}
+\implies
+e^{At} =
+\begin{bmatrix}
+e^{\lambda_1 t} & 0 & \cdots & 0 \\
+0 & e^{\lambda_2 t} & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & e^{\lambda_n t}
+\end{bmatrix}
+\end{gather*}
+
+\paragraph{Bloco de Jordan}
+
+\begin{gather*}
+J =
+\begin{bmatrix}
+\lambda & 1 \\
+0 & \lambda
+\end{bmatrix}
+\implies
+e^{Jt} =
+\begin{bmatrix}
+e^{\lambda t} & t e^{\lambda t} \\
+0 & e^{\lambda t}
+\end{bmatrix}
+\\[1ex]
+J =
+\begin{bmatrix}
+\lambda & 1 & 0 \\
+0 & \lambda & 1 \\
+0 & 0 & \lambda
+\end{bmatrix}
+\implies
+e^{Jt} =
+\begin{bmatrix}
+e^{\lambda t} & t e^{\lambda t} & \frac{t^2}{2} e^{\lambda t} \\
+0 & e^{\lambda t} & t e^{\lambda t} \\
+0 & 0 & e^{\lambda t}
+\end{bmatrix}
+\end{gather*}
+
+\begin{itemize}
+    \item Em geral, $e^{J_k(\lambda) t}$ tem $e^{\lambda t}$ na diagonal, $t e^{\lambda t}$ na primeira
+    diagonal acima, $\frac{t^2}{2!} e^{\lambda t}$ na segunda, \ldots, até $\frac{t^{k-1}}{(k-1)!} e^{\lambda t}$
+    no canto superior direito.
+    \item Isto resulta de $J = \lambda I + N$, onde $N$ tem $1$ acima da diagonal e $N^k = 0$. Como $\lambda I$
+    e $N$ comutam, $e^{Jt} = e^{\lambda t} e^{Nt} = e^{\lambda t} \left( I + Nt + \cdots
+    + \frac{N^{k-1} t^{k-1}}{(k-1)!} \right)$.
+\end{itemize}
+
+\paragraph{Matriz diagonal de blocos}
+
+\begin{gather*}
+M =
+\begin{bmatrix}
+M_1 & \cdots & 0 \\
+\vdots & \ddots & \vdots \\
+0 & \cdots & M_k
+\end{bmatrix}
+\implies
+e^{Mt} =
+\begin{bmatrix}
+e^{M_1 t} & \cdots & 0 \\
+\vdots & \ddots & \vdots \\
+0 & \cdots & e^{M_k t}
+\end{bmatrix}
+\end{gather*}
+
+Assim, para uma matriz de Jordan, calcula-se a exponencial de cada bloco separadamente. Por exemplo:
+
+\begin{gather*}
+J =
+\begin{bmatrix}
+\lambda_1 & 0 & 0 \\
+0 & \lambda_2 & 1 \\
+0 & 0 & \lambda_2
+\end{bmatrix}
+\implies
+e^{Jt} =
+\begin{bmatrix}
+e^{\lambda_1 t} & 0 & 0 \\
+0 & e^{\lambda_2 t} & t e^{\lambda_2 t} \\
+0 & 0 & e^{\lambda_2 t}
+\end{bmatrix}
+\end{gather*}
 
 
 \end{document}
-
